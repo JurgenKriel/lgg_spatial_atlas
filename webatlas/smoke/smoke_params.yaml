@@ -1,0 +1,25 @@
+outdir: "/vast/scratch/users/kriel.j/webatlas_smoke_out/"
+args:
+  h5ad:
+    compute_embeddings: "True"
+projects:
+  - project: lgg_atlas_smoke
+    datasets:
+      - dataset: smoke
+        title: "Smoke test"
+        data:
+          - data_type: h5ad
+            data_path: /vast/projects/BCRL_Multi_Omics/venture_atlas/webatlas/smoke/smoke_anndata.h5ad
+vitessce_options:
+  spatial:
+    xy: "obsm/spatial"
+  mappings:
+    obsm/X_umap: [0, 1]
+  factors:
+    - "obs/cell_type"
+    - "obs/niche"
+  sets:
+    - "obs/cell_type"
+    - "obs/niche"
+  matrix: "X"
+layout: "simple"
