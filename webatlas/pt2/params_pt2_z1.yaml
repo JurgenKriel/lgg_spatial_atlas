@@ -1,0 +1,25 @@
+outdir: "/vast/scratch/users/kriel.j/webatlas_pt2_out/"
+args:
+  h5ad:
+    compute_embeddings: "True"
+projects:
+  - project: lgg_pt2_atlas
+    datasets:
+      - dataset: ven2_z1
+        title: "LGG pt2 (ven2) z1"
+        data:
+          - data_type: h5ad
+            data_path: /vast/scratch/users/kriel.j/atlas_pt2/h5ad/pt2_ven2_z1.h5ad
+vitessce_options:
+  spatial:
+    xy: "obsm/spatial"
+  mappings:
+    obsm/X_umap: [0, 1]
+  factors:
+    - "obs/cell_type"
+    - "obs/niche"
+  sets:
+    - "obs/cell_type"
+    - "obs/niche"
+  matrix: "X"
+layout: "simple"
