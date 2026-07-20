@@ -1,0 +1,11 @@
+# External pipeline clone (has its own git history; not part of this repo)
+webatlas/webatlas-pipeline/
+# Runtime logs, container images, pipeline work dirs
+webatlas/logs/
+*.sif
+.nextflow*/
+work/
+# Scratch / large data never committed
+*.h5ad
+*.zarr/
+build/scratch/
