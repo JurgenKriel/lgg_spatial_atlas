@@ -1,12 +1,42 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LGG Spatial Atlas — pt2 test</title>
-<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:3rem auto;padding:0 1rem;line-height:1.5}
-a.btn{display:inline-block;background:#2563eb;color:#fff;padding:.7rem 1.1rem;border-radius:8px;text-decoration:none;font-weight:600}
-code{background:#f1f5f9;padding:.1rem .3rem;border-radius:4px}</style></head><body>
-<h1>LGG Spatial Atlas — pt2 (test)</h1>
-<p>Test view of one z-plane (<code>ven2_z1</code>, 40,107 cells): spatial map with
-<b>Cell type</b> &amp; <b>Niche</b> selectors and a feature list of 339 genes + 857 metabolites.</p>
-<p><a class="btn" href="https://vitessce.io/?url=https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z1-config.json" target="_blank" rel="noopener">▶ Open in Vitessce</a></p>
-<p style="color:#64748b;font-size:.9rem">Opens the config in vitessce.io. Data is served from this GitHub Pages site.</p>
+<title>LGG Spatial Atlas — Venture pt2</title>
+<style>
+  :root{color-scheme:light dark}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+       background:#0f172a;color:#e2e8f0}
+  header{padding:.8rem 1.2rem;border-bottom:1px solid #1e293b;display:flex;
+         gap:1.5rem;align-items:center;flex-wrap:wrap}
+  h1{font-size:1.05rem;margin:0;font-weight:650;white-space:nowrap}
+  .ctl{display:flex;align-items:center;gap:.7rem}
+  input[type=range]{width:190px;accent-color:#38bdf8}
+  #zlabel{font-variant-numeric:tabular-nums;font-weight:700;color:#38bdf8;min-width:2.2rem}
+  .meta{color:#94a3b8;font-size:.82rem}
+  a{color:#38bdf8}
+  iframe{width:100%;height:calc(100vh - 62px);border:0;display:block;background:#000}
+</style></head><body>
+<header>
+  <h1>LGG Spatial Atlas — pt2 (ven2)</h1>
+  <div class="ctl">
+    <label for="z">Z-plane</label>
+    <input type="range" id="z" min="1" max="3" step="1" value="1">
+    <span id="zlabel">z1</span>
+  </div>
+  <span class="meta">left: cells (gene / cell type / niche) &middot; right: MS ion density (m/z)</span>
+  <a id="newtab" href="#" target="_blank" rel="noopener" class="meta">open full-screen &#8599;</a>
+</header>
+<iframe id="v" title="Vitessce viewer"></iframe>
+<script>
+  var BASE = "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/";
+  var STAMP = "1784552623";
+  function cfg(z){ return BASE + "lgg_pt2_atlas-ven2_z" + z + "-config.json?v=" + STAMP; }
+  function url(z){ return "https://vitessce.io/?url=" + cfg(z); }
+  var s = document.getElementById("z"), f = document.getElementById("v"),
+      lab = document.getElementById("zlabel"), nt = document.getElementById("newtab");
+  function go(){ var z=s.value; lab.textContent="z"+z; f.src=url(z); nt.href=url(z); }
+  s.addEventListener("input", function(){ lab.textContent="z"+s.value; });
+  s.addEventListener("change", go);
+  go();
+</script>
 </body></html>

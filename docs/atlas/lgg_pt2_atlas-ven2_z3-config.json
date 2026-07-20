@@ -1,0 +1,567 @@
+{
+  "version": "1.0.16",
+  "name": "LGG pt2 - ven2_z1",
+  "description": "Venture pt2 (ven2) z1: genes + cell types + niches (cells); m/z ion density (MS spots)",
+  "datasets": [
+    {
+      "uid": "A",
+      "name": "Cells (ven2_z1)",
+      "files": [
+        {
+          "fileType": "anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z3-anndata.zarr",
+          "options": {
+            "obsEmbedding": [
+              {
+                "path": "obsm/spatial",
+                "dims": [
+                  0,
+                  1
+                ],
+                "embeddingType": "Spatial"
+              },
+              {
+                "path": "obsm/X_umap",
+                "dims": [
+                  0,
+                  1
+                ],
+                "embeddingType": "UMAP"
+              }
+            ],
+            "obsSets": [
+              {
+                "name": "Cell Type",
+                "path": "obs/cell_type"
+              },
+              {
+                "name": "Niche",
+                "path": "obs/niche"
+              }
+            ],
+            "obsFeatureMatrix": {
+              "path": "X",
+              "featureFilterPath": "var/is_gene"
+            }
+          },
+          "coordinationValues": {
+            "obsType": "cell",
+            "featureType": "gene"
+          }
+        }
+      ]
+    },
+    {
+      "uid": "B",
+      "name": "Metabolites (MS spots)",
+      "files": [
+        {
+          "fileType": "anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/ms_ven2_z3-anndata.zarr",
+          "options": {
+            "obsEmbedding": [
+              {
+                "path": "obsm/spatial",
+                "dims": [
+                  0,
+                  1
+                ],
+                "embeddingType": "Spatial"
+              }
+            ],
+            "obsFeatureMatrix": {
+              "path": "X"
+            }
+          },
+          "coordinationValues": {
+            "obsType": "spot",
+            "featureType": "metabolite"
+          }
+        }
+      ]
+    }
+  ],
+  "coordinationSpace": {
+    "dataset": {
+      "A": "A",
+      "B": "B"
+    },
+    "embeddingType": {
+      "A": "Spatial",
+      "B": "Spatial"
+    },
+    "obsType": {
+      "A": "cell",
+      "B": "spot"
+    },
+    "featureType": {
+      "A": "gene",
+      "B": "metabolite"
+    },
+    "featureSelection": {
+      "A": null,
+      "B": null
+    },
+    "obsColorEncoding": {
+      "A": "cellSetSelection",
+      "B": "geneSelection"
+    },
+    "obsSetColor": {
+      "A": [
+        {
+          "path": [
+            "Cell Type",
+            "Astrocyte"
+          ],
+          "color": [
+            248,
+            199,
+            198
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Inhibitory"
+          ],
+          "color": [
+            156,
+            252,
+            255
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Excitatory"
+          ],
+          "color": [
+            16,
+            244,
+            184
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "OPC"
+          ],
+          "color": [
+            167,
+            200,
+            86
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Microglia"
+          ],
+          "color": [
+            126,
+            79,
+            36
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Endothelial"
+          ],
+          "color": [
+            25,
+            102,
+            204
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Oligodendrocyte"
+          ],
+          "color": [
+            205,
+            222,
+            184
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Mural"
+          ],
+          "color": [
+            172,
+            181,
+            188
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "OPC-like"
+          ],
+          "color": [
+            106,
+            153,
+            78
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "AC-like"
+          ],
+          "color": [
+            241,
+            132,
+            129
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Activated Microglia"
+          ],
+          "color": [
+            187,
+            88,
+            0
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Progenitor"
+          ],
+          "color": [
+            238,
+            34,
+            59
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Macrophage"
+          ],
+          "color": [
+            166,
+            137,
+            99
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Fibroblast"
+          ],
+          "color": [
+            175,
+            104,
+            170
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Immunosuppressive Microglia"
+          ],
+          "color": [
+            151,
+            42,
+            0
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "MES-like"
+          ],
+          "color": [
+            157,
+            78,
+            221
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "NPC-like"
+          ],
+          "color": [
+            57,
+            123,
+            164
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "CD4 T Cell"
+          ],
+          "color": [
+            244,
+            139,
+            5
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "M2 Macrophage"
+          ],
+          "color": [
+            198,
+            158,
+            107
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "CD8 T Cell"
+          ],
+          "color": [
+            232,
+            93,
+            6
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "NK Cell"
+          ],
+          "color": [
+            255,
+            185,
+            7
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "B Cell"
+          ],
+          "color": [
+            255,
+            213,
+            9
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Monocyte"
+          ],
+          "color": [
+            182,
+            172,
+            144
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "N"
+          ],
+          "color": [
+            0,
+            92,
+            48
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-TC"
+          ],
+          "color": [
+            0,
+            117,
+            220
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-LE"
+          ],
+          "color": [
+            159,
+            207,
+            134
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "V"
+          ],
+          "color": [
+            247,
+            120,
+            0
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-O"
+          ],
+          "color": [
+            239,
+            159,
+            255
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-AA"
+          ],
+          "color": [
+            75,
+            0,
+            92
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-AMN"
+          ],
+          "color": [
+            147,
+            255,
+            181
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "I"
+          ],
+          "color": [
+            195,
+            156,
+            147
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "white"
+          ],
+          "color": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-P"
+          ],
+          "color": [
+            144,
+            104,
+            172
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-M"
+          ],
+          "color": [
+            43,
+            206,
+            71
+          ]
+        }
+      ]
+    },
+    "featureValueColormap": {
+      "A": "viridis"
+    }
+  },
+  "layout": [
+    {
+      "component": "scatterplot",
+      "coordinationScopes": {
+        "dataset": "A",
+        "embeddingType": "A",
+        "obsType": "A",
+        "featureType": "A",
+        "featureSelection": "A",
+        "obsColorEncoding": "A",
+        "obsSetColor": "A"
+      },
+      "x": 0.0,
+      "y": 0.0,
+      "w": 6.0,
+      "h": 6.0
+    },
+    {
+      "component": "scatterplot",
+      "coordinationScopes": {
+        "dataset": "B",
+        "embeddingType": "B",
+        "obsType": "B",
+        "featureType": "B",
+        "featureSelection": "B",
+        "obsColorEncoding": "B",
+        "featureValueColormap": "A"
+      },
+      "x": 6.0,
+      "y": 0.0,
+      "w": 6.0,
+      "h": 6.0
+    },
+    {
+      "component": "obsSets",
+      "coordinationScopes": {
+        "dataset": "A",
+        "obsType": "A",
+        "obsSetColor": "A"
+      },
+      "x": 0.0,
+      "y": 6.0,
+      "w": 6.0,
+      "h": 6.0
+    },
+    {
+      "component": "featureList",
+      "coordinationScopes": {
+        "dataset": "A",
+        "obsType": "A",
+        "featureType": "A",
+        "featureSelection": "A",
+        "obsColorEncoding": "A"
+      },
+      "x": 6.0,
+      "y": 6.0,
+      "w": 3.0,
+      "h": 6.0
+    },
+    {
+      "component": "featureList",
+      "coordinationScopes": {
+        "dataset": "B",
+        "obsType": "B",
+        "featureType": "B",
+        "featureSelection": "B",
+        "obsColorEncoding": "B",
+        "featureValueColormap": "A"
+      },
+      "x": 9.0,
+      "y": 6.0,
+      "w": 3.0,
+      "h": 6.0
+    }
+  ],
+  "initStrategy": "auto"
+}
