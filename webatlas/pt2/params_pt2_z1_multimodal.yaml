@@ -1,0 +1,18 @@
+outdir: "/vast/scratch/users/kriel.j/webatlas_pt2_mm_out/"
+project: lgg_pt2_atlas_mm
+title: "LGG pt2 (ven2) z1 — multimodal"
+url: "http://localhost:3000/"
+extend_feature_name: "metabolite"
+data:
+  - dataset: ven2_z1
+    obs_type: "cell"
+    anndata: /vast/scratch/users/kriel.j/atlas_pt2/h5ad_mm/pt2_ven2_z1_mm.h5ad
+    offset: 0
+    is_spatial: true
+    vitessce_options:
+      spatial:
+        xy: "obsm/spatial"
+      sets:
+        - "obs/cell_type"
+        - "obs/niche"
+      matrix: "X"
