@@ -1,0 +1,40 @@
+{
+ "cell_type": {
+  "Astrocyte": "#f8c7c6",
+  "Inhibitory": "#9cfcff",
+  "Excitatory": "#10f4b8",
+  "OPC": "#a7c856",
+  "Microglia": "#7e4f24",
+  "Endothelial": "#1966cc",
+  "Oligodendrocyte": "#cddeb8",
+  "Mural": "#acb5bc",
+  "OPC-like": "#6a994e",
+  "AC-like": "#f18481",
+  "Activated Microglia": "#bb5800",
+  "Progenitor": "#ee223b",
+  "Macrophage": "#a68963",
+  "Fibroblast": "#af68aa",
+  "Immunosuppressive Microglia": "#972a00",
+  "MES-like": "#9d4edd",
+  "NPC-like": "#397ba4",
+  "CD4 T Cell": "#f48b05",
+  "M2 Macrophage": "#c69e6b",
+  "CD8 T Cell": "#e85d06",
+  "NK Cell": "#ffb907",
+  "B Cell": "#ffd509",
+  "Monocyte": "#b6ac90"
+ },
+ "niche": {
+  "N": "#005c30",
+  "T-TC": "#0075dc",
+  "T-LE": "#9fcf86",
+  "V": "#f77800",
+  "T-O": "#ef9fff",
+  "T-AA": "#4b005c",
+  "T-AMN": "#93ffb5",
+  "I": "#c39c93",
+  "white": "#ffffff",
+  "T-P": "#9068ac",
+  "T-M": "#2bce47"
+ }
+}
