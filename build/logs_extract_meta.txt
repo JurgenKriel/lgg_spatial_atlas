@@ -1,0 +1,8 @@
+wrote integrated_meta.csv rows: 334395 cols: cellname,cell_id,sample_id,orig.ident,Anno,Anno_2,x_centroid,y_centroid,x_aligned,y_aligned 
+cell_id ex: aahoahif-1, aahogahi-1, aahpdpeh-1, aaiaglgd-1 
+cellname ex: 6901_1_aahoahif-1, 6901_1_aahogahi-1, 6901_1_aahpdpeh-1, 6901_1_aaiaglgd-1 
+SPT genes: 339  SPM metabolites: 857 
+sample_id counts:
+
+6687_1 6687_2 6694_1 6694_2 6889_1 6889_2 6901_1 6901_2 
+ 48508  42032  42565  39834  42513  47450  31386  40107 

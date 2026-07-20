@@ -1,0 +1,14 @@
+Reading /vast/projects/BCRL_Multi_Omics/venture_pt2/integrated/integrated_data_250925.rds ...
+class: Seurat 
+dim (features x cells): 857 x 334395 
+assays: SPM, SPT 
+DefaultAssay: SPM 
+  assay SPM            : 857 features x 334395 cells | feat ex: mz-72.0800762176514, mz-74.0957965850830, mz-78.9549760818481, mz-80.9513168334961, mz-86.0959444046021, mz-87.0988817214966
+  assay SPT            : 339 features x 334395 cells | feat ex: AATK, ABCA2, ABCC3, AIF1, AKAP12, ALOX5AP
+cell name ex: 6901_1_aahoahif-1, 6901_1_aahogahi-1, 6901_1_aahpdpeh-1, 6901_1_aaiaglgd-1 
+meta.data cols: orig.ident, nCount_originalexp, nFeature_originalexp, sample_id, sizeFactor, Cluster, nuc_Anno1, pred_labels, cout_labels, nuc_Anno2, cell_id, nuc_Anno3, Anno, Anno_2, Anno_3, x_centroid, y_centroid, Tile, x_aligned, y_aligned, SPM_pixels, nCount_SPM, nFeature_SPM, orig.ident_SPM, nCount_Spatial_SPM, nFeature_Spatial_SPM, x_coord_SPM, y_coord_SPM, nCount_SPT, nFeature_SPT, ST_clusters, seurat_clusters, SM_clusters, SPT.weight, SPM.weight, integrated_clusters, refined_clusters 
+  meta[Anno]: 23 uniq -> Microglia, Oligodendrocyte, OPC-like, Endothelial, Progenitor, Astrocyte, AC-like, Excitatory
+  meta[sample_id]: 8 uniq -> 6901_1, 6901_2, 6889_1, 6889_2, 6694_1, 6694_2, 6687_1, 6687_2
+  meta[orig.ident]: 4 uniq -> 6901, 6889, 6694, 6687
+reductions: spm.pca, spm.umap, integrated.rpca, integrated.umap, st.pca, wnn.umap 
+images: image, image.2, image.3, image.4, image.5, image.6, image.7, image.8 

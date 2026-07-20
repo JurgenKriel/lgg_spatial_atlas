@@ -91,7 +91,7 @@ the full cohort.
 | Phase | Plans | Status |
 |-------|-------|--------|
 | 1. Pipeline bootstrap | 1/1 | **Complete** (2026-07-20) |
-| 2. pt2 AnnData assembly | 0/2 | Planned |
+| 2. pt2 AnnData assembly | 0/2 | **02-01 done** (join resolved, 100% matched); building AnnData |
 | 3. webatlas config + build | 0/? | Roadmapped |
 | 4. Viewer UX | 0/? | Roadmapped |
 | 5. Deployment | 0/? | Roadmapped |
