@@ -1,7 +1,6 @@
 {
   "version": "1.0.16",
-  "name": "LGG pt2 ven2_z1",
-  "description": "",
+  "name": "LGG pt2 \u2014 ven2_z1",
   "datasets": [
     {
       "uid": "A",
@@ -14,19 +13,19 @@
             "obsEmbedding": [
               {
                 "path": "obsm/spatial",
+                "embeddingType": "Spatial",
                 "dims": [
                   0,
                   1
-                ],
-                "embeddingType": "Spatial"
+                ]
               },
               {
                 "path": "obsm/X_umap",
+                "embeddingType": "UMAP",
                 "dims": [
                   0,
                   1
-                ],
-                "embeddingType": "UMAP"
+                ]
               }
             ],
             "obsSets": [
@@ -38,14 +37,47 @@
                 "name": "Niche",
                 "path": "obs/niche"
               }
-            ],
-            "obsFeatureMatrix": {
-              "path": "X"
-            }
+            ]
+          },
+          "coordinationValues": {
+            "obsType": "cell"
+          }
+        },
+        {
+          "fileType": "obsFeatureMatrix.anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z1-anndata.zarr",
+          "options": {
+            "path": "X",
+            "featureFilterPath": "var/is_gene"
           },
           "coordinationValues": {
             "obsType": "cell",
-            "featureType": "feature",
+            "featureType": "gene",
+            "featureValueType": "expression"
+          }
+        },
+        {
+          "fileType": "obsFeatureMatrix.anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z1-anndata.zarr",
+          "options": {
+            "path": "X",
+            "featureFilterPath": "var/is_metabolite"
+          },
+          "coordinationValues": {
+            "obsType": "cell",
+            "featureType": "metabolite",
+            "featureValueType": "expression"
+          }
+        },
+        {
+          "fileType": "obsFeatureMatrix.anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z1-anndata.zarr",
+          "options": {
+            "path": "X"
+          },
+          "coordinationValues": {
+            "obsType": "cell",
+            "featureType": "combined",
             "featureValueType": "expression"
           }
         }
@@ -56,9 +88,408 @@
     "dataset": {
       "A": "A"
     },
+    "obsType": {
+      "A": "cell"
+    },
+    "featureType": {
+      "gene": "gene",
+      "metabolite": "metabolite",
+      "combined": "combined"
+    },
+    "featureValueType": {
+      "A": "expression"
+    },
     "embeddingType": {
-      "A": "Spatial",
-      "B": "UMAP"
+      "Spatial": "Spatial",
+      "UMAP": "UMAP"
+    },
+    "obsColorEncoding": {
+      "A": "cellSetSelection"
+    },
+    "featureSelection": {
+      "combined": null
+    },
+    "obsSetSelection": {
+      "A": null
+    },
+    "obsSetColor": {
+      "A": [
+        {
+          "path": [
+            "Cell Type",
+            "AC-like"
+          ],
+          "color": [
+            241,
+            132,
+            129
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Activated Microglia"
+          ],
+          "color": [
+            187,
+            88,
+            0
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Astrocyte"
+          ],
+          "color": [
+            248,
+            199,
+            198
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "B Cell"
+          ],
+          "color": [
+            255,
+            213,
+            9
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "CD4 T Cell"
+          ],
+          "color": [
+            244,
+            139,
+            5
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "CD8 T Cell"
+          ],
+          "color": [
+            232,
+            93,
+            6
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Endothelial"
+          ],
+          "color": [
+            25,
+            102,
+            204
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Excitatory"
+          ],
+          "color": [
+            16,
+            244,
+            184
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Fibroblast"
+          ],
+          "color": [
+            175,
+            104,
+            170
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Immunosuppressive Microglia"
+          ],
+          "color": [
+            151,
+            42,
+            0
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Inhibitory"
+          ],
+          "color": [
+            156,
+            252,
+            255
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "MES-like"
+          ],
+          "color": [
+            157,
+            78,
+            221
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Macrophage"
+          ],
+          "color": [
+            166,
+            137,
+            99
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Microglia"
+          ],
+          "color": [
+            126,
+            79,
+            36
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Mixed-AC-like"
+          ],
+          "color": [
+            136,
+            136,
+            136
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Monocyte"
+          ],
+          "color": [
+            182,
+            172,
+            144
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Mural"
+          ],
+          "color": [
+            172,
+            181,
+            188
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "NK Cell"
+          ],
+          "color": [
+            255,
+            185,
+            7
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "NPC-like"
+          ],
+          "color": [
+            57,
+            123,
+            164
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "OPC"
+          ],
+          "color": [
+            167,
+            200,
+            86
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "OPC-like"
+          ],
+          "color": [
+            106,
+            153,
+            78
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Oligodendrocyte"
+          ],
+          "color": [
+            205,
+            222,
+            184
+          ]
+        },
+        {
+          "path": [
+            "Cell Type",
+            "Progenitor"
+          ],
+          "color": [
+            238,
+            34,
+            59
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "I"
+          ],
+          "color": [
+            195,
+            156,
+            147
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "N"
+          ],
+          "color": [
+            0,
+            92,
+            48
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-AA"
+          ],
+          "color": [
+            75,
+            0,
+            92
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-AMN"
+          ],
+          "color": [
+            147,
+            255,
+            181
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-LE"
+          ],
+          "color": [
+            159,
+            207,
+            134
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-O"
+          ],
+          "color": [
+            239,
+            159,
+            255
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-P"
+          ],
+          "color": [
+            144,
+            104,
+            172
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "T-TC"
+          ],
+          "color": [
+            0,
+            117,
+            220
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "V"
+          ],
+          "color": [
+            247,
+            120,
+            0
+          ]
+        },
+        {
+          "path": [
+            "Niche",
+            "white"
+          ],
+          "color": [
+            255,
+            255,
+            255
+          ]
+        }
+      ]
+    },
+    "featureValueColormap": {
+      "A": "plasma"
+    },
+    "spatialZoom": {
+      "A": null
+    },
+    "spatialTargetX": {
+      "A": null
+    },
+    "spatialTargetY": {
+      "A": null
     }
   },
   "layout": [
@@ -66,43 +497,83 @@
       "component": "scatterplot",
       "coordinationScopes": {
         "dataset": "A",
-        "embeddingType": "A"
+        "embeddingType": "Spatial",
+        "obsType": "A",
+        "obsColorEncoding": "A",
+        "obsSetColor": "A",
+        "obsSetSelection": "A",
+        "featureType": "combined",
+        "featureValueType": "A",
+        "featureSelection": "combined",
+        "featureValueColormap": "A"
       },
-      "x": 0.0,
+      "x": 0,
       "y": 0,
-      "w": 6.0,
-      "h": 12
+      "w": 6,
+      "h": 8
     },
     {
       "component": "scatterplot",
       "coordinationScopes": {
         "dataset": "A",
-        "embeddingType": "B"
+        "embeddingType": "UMAP",
+        "obsType": "A",
+        "obsColorEncoding": "A",
+        "obsSetColor": "A",
+        "obsSetSelection": "A",
+        "featureType": "combined",
+        "featureValueType": "A",
+        "featureSelection": "combined",
+        "featureValueColormap": "A"
       },
-      "x": 6.0,
-      "y": 0.0,
-      "w": 6.0,
-      "h": 6.0
+      "x": 0,
+      "y": 8,
+      "w": 6,
+      "h": 4
     },
     {
       "component": "obsSets",
       "coordinationScopes": {
-        "dataset": "A"
+        "dataset": "A",
+        "obsType": "A",
+        "obsSetColor": "A",
+        "obsSetSelection": "A",
+        "obsColorEncoding": "A"
       },
-      "x": 6.0,
-      "y": 6.0,
-      "w": 6.0,
-      "h": 3.0
+      "x": 6,
+      "y": 0,
+      "w": 3,
+      "h": 12
     },
     {
       "component": "featureList",
       "coordinationScopes": {
-        "dataset": "A"
+        "dataset": "A",
+        "obsType": "A",
+        "featureType": "gene",
+        "featureValueType": "A",
+        "featureSelection": "combined",
+        "obsColorEncoding": "A"
       },
-      "x": 6.0,
-      "y": 9.0,
-      "w": 6.0,
-      "h": 3.0
+      "x": 9,
+      "y": 0,
+      "w": 3,
+      "h": 6
+    },
+    {
+      "component": "featureList",
+      "coordinationScopes": {
+        "dataset": "A",
+        "obsType": "A",
+        "featureType": "metabolite",
+        "featureValueType": "A",
+        "featureSelection": "combined",
+        "obsColorEncoding": "A"
+      },
+      "x": 9,
+      "y": 6,
+      "w": 3,
+      "h": 6
     }
   ],
   "initStrategy": "auto"

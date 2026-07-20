@@ -43,13 +43,13 @@
         "obs/.zattrs": {
             "_index": "_index",
             "column-order": [
-                "label_id",
                 "cell_type",
                 "niche",
                 "cell_id",
                 "z_plane",
                 "x_centroid",
-                "y_centroid"
+                "y_centroid",
+                "cellname"
             ],
             "encoding-type": "dataframe",
             "encoding-version": "0.2.0"
@@ -173,7 +173,7 @@
             "encoding-type": "array",
             "encoding-version": "0.2.0"
         },
-        "obs/label_id/.zarray": {
+        "obs/cellname/.zarray": {
             "chunks": [
                 20054
             ],
@@ -197,7 +197,7 @@
             ],
             "zarr_format": 2
         },
-        "obs/label_id/.zattrs": {
+        "obs/cellname/.zattrs": {
             "encoding-type": "string-array",
             "encoding-version": "0.2.0"
         },
@@ -922,24 +922,12 @@
             "encoding-type": "numeric-scalar",
             "encoding-version": "0.2.0"
         },
-        "uns/webatlas_reindexed/.zarray": {
-            "chunks": [],
-            "compressor": null,
-            "dtype": "|b1",
-            "fill_value": false,
-            "filters": null,
-            "order": "C",
-            "shape": [],
-            "zarr_format": 2
-        },
-        "uns/webatlas_reindexed/.zattrs": {
-            "encoding-type": "numeric-scalar",
-            "encoding-version": "0.2.0"
-        },
         "var/.zattrs": {
             "_index": "_index",
             "column-order": [
-                "feature_type"
+                "feature_type",
+                "is_gene",
+                "is_metabolite"
             ],
             "encoding-type": "dataframe",
             "encoding-version": "0.2.0"
@@ -1032,6 +1020,54 @@
             "zarr_format": 2
         },
         "var/feature_type/codes/.zattrs": {
+            "encoding-type": "array",
+            "encoding-version": "0.2.0"
+        },
+        "var/is_gene/.zarray": {
+            "chunks": [
+                1196
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|b1",
+            "fill_value": false,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1196
+            ],
+            "zarr_format": 2
+        },
+        "var/is_gene/.zattrs": {
+            "encoding-type": "array",
+            "encoding-version": "0.2.0"
+        },
+        "var/is_metabolite/.zarray": {
+            "chunks": [
+                1196
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|b1",
+            "fill_value": false,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                1196
+            ],
+            "zarr_format": 2
+        },
+        "var/is_metabolite/.zattrs": {
             "encoding-type": "array",
             "encoding-version": "0.2.0"
         },

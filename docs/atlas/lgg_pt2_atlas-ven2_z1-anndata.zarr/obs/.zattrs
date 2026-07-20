@@ -1,13 +1,13 @@
 {
     "_index": "_index",
     "column-order": [
-        "label_id",
         "cell_type",
         "niche",
         "cell_id",
         "z_plane",
         "x_centroid",
-        "y_centroid"
+        "y_centroid",
+        "cellname"
     ],
     "encoding-type": "dataframe",
     "encoding-version": "0.2.0"
