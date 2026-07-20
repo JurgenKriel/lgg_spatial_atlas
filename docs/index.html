@@ -24,17 +24,20 @@
     <span id="zlabel">z1</span>
   </div>
   <span class="meta">left: cells (gene / cell type / niche) &middot; right: MS ion density (m/z)</span>
+  <span class="meta" id="pairing"></span>
   <a id="newtab" href="#" target="_blank" rel="noopener" class="meta">open full-screen &#8599;</a>
 </header>
 <iframe id="v" title="Vitessce viewer"></iframe>
 <script>
   var BASE = "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/";
-  var STAMP = "1784552623";
+  var STAMP = Date.now();   // dynamic: always fetch the current config
   function cfg(z){ return BASE + "lgg_pt2_atlas-ven2_z" + z + "-config.json?v=" + STAMP; }
   function url(z){ return "https://vitessce.io/?url=" + cfg(z); }
   var s = document.getElementById("z"), f = document.getElementById("v"),
       lab = document.getElementById("zlabel"), nt = document.getElementById("newtab");
-  function go(){ var z=s.value; lab.textContent="z"+z; f.src=url(z); nt.href=url(z); }
+  var MSFOR={1:"ms z2",2:"ms z1",3:"ms z3"};
+  function go(){ var z=s.value; lab.textContent="z"+z; f.src=url(z); nt.href=url(z);
+    document.getElementById("pairing").textContent="ST z"+z+" \u2194 "+MSFOR[z]; }
   s.addEventListener("input", function(){ lab.textContent="z"+s.value; });
   s.addEventListener("change", go);
   go();
