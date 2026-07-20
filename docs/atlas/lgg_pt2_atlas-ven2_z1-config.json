@@ -1,0 +1,106 @@
+{
+  "version": "1.0.15",
+  "name": "LGG pt2 (ven2) z1",
+  "description": "",
+  "datasets": [
+    {
+      "uid": "ven2_z1",
+      "name": "ven2_z1",
+      "files": [
+        {
+          "fileType": "anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z1-anndata.zarr",
+          "options": {
+            "obsLocations": {
+              "path": "obsm/spatial"
+            },
+            "obsEmbedding": [
+              {
+                "path": "obsm/X_umap",
+                "embeddingType": "X_UMAP",
+                "dims": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "obsLabels": [
+              {
+                "path": "obs/cell_type",
+                "obsLabelsType": "Cell_type"
+              },
+              {
+                "path": "obs/niche",
+                "obsLabelsType": "Niche"
+              }
+            ],
+            "obsSets": [
+              {
+                "name": "CellType",
+                "path": "obs/cell_type"
+              },
+              {
+                "name": "Niche",
+                "path": "obs/niche"
+              }
+            ],
+            "obsFeatureMatrix": {
+              "path": "X"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "coordinationSpace": {
+    "dataset": {
+      "A": "ven2_z1"
+    },
+    "embeddingType": {
+      "X_UMAP": "X_UMAP"
+    }
+  },
+  "layout": [
+    {
+      "component": "spatial",
+      "coordinationScopes": {
+        "dataset": "A"
+      },
+      "x": 0,
+      "y": 0,
+      "w": 6,
+      "h": 12
+    },
+    {
+      "component": "layerController",
+      "coordinationScopes": {
+        "dataset": "A"
+      },
+      "x": 6,
+      "y": 0,
+      "w": 3,
+      "h": 12
+    },
+    {
+      "component": "featureList",
+      "coordinationScopes": {
+        "dataset": "A"
+      },
+      "x": 9,
+      "y": 0,
+      "w": 3,
+      "h": 6
+    },
+    {
+      "component": "obsSets",
+      "coordinationScopes": {
+        "dataset": "A"
+      },
+      "x": 9,
+      "y": 6,
+      "w": 3,
+      "h": 6
+    }
+  ],
+  "initStrategy": "auto"
+}
