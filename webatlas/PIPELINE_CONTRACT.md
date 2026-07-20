@@ -108,3 +108,41 @@ Pipeline writes AnnData-zarr + OME-Zarr via its pinned container deps (zarr-pyth
   intentional per nextflow.config; use 0.5.2 for apptainer.
 - Nextflow 25.10.3 (~/bin) is far newer than the pipeline (2023-era). If DSL2/syntax
   incompat surfaces, fall back to `module load nextflow/24.10.5` or `23.10.0`.
+
+---
+
+## Phase 1 smoke-run findings — CONFIRMED (2026-07-20)
+
+Ran `Full_pipeline` on a 200-cell synthetic AnnData under apptainer/1.4.1 +
+Nextflow 25.10.3. Outputs in `/vast/scratch/users/kriel.j/webatlas_smoke_out/0.5.3/`.
+
+- **Works end to end.** Processes: `Process_files:route_file` (h5ad→zarr) +
+  `Output_to_config:Build_config` (→ Vitessce config.json).
+- **Output zarr is v2** (`.zgroup` → `"zarr_format": 2`). No down-conversion needed;
+  local envs read it directly.
+- **Vitessce config schema v1.0.15.** Real field names produced from our
+  `vitessce_options`:
+  - `obsLocations.path = obsm/spatial`  (from `spatial.xy`)
+  - `obsEmbedding[].path = obsm/X_umap` (auto-computed by `compute_embeddings: True`; also writes X_pca)
+  - `obsSets[] = obs/cell_type, obs/niche`  (from `sets`)  → **Cell type + Niche selectors**
+  - `obsLabels[] = obs/cell_type, obs/niche` (from `factors`)
+  - `obsFeatureMatrix.path = X`  (from `matrix`)  → **Gene selector**
+- So **3 of our 4 layers (Gene, Cell type, Niche) work with the single-modality
+  Full_pipeline**. **Metabolite** needs the multimodal path / a 2nd feature matrix
+  (see "Metabolites as a distinct feature type" above) — target that in Phase 3.
+
+### HPC gotcha (REQUIRED for every run) — numba/matplotlib cache
+The container fs is read-only; `import scanpy` triggers numba caching which fails
+with `cannot cache function ... no locator available`. Fix via a Nextflow `env {}`
+override (`smoke/extra.config`) — host env passthrough (`APPTAINERENV_*`) does NOT
+reach the container:
+```groovy
+env { NUMBA_CACHE_DIR='/tmp/numba_cache'; MPLCONFIGDIR='/tmp/mpl_cache'; XDG_CACHE_HOME='/tmp/xdg_cache' }
+process { beforeScript = 'mkdir -p /tmp/numba_cache /tmp/mpl_cache /tmp/xdg_cache' }
+```
+Pass with `-c smoke/extra.config`. Reuse this config for the real pt2 runs.
+
+### Container naming note
+Nextflow re-pulls with its own cache filename (`haniffalab-webatlas-pipeline-0.5.2.img`),
+ignoring manually-named `.sif`. The manual `pull_containers.sh` still helps by warming
+the OCI layer cache. Both live in `NXF_SINGULARITY_CACHEDIR`.

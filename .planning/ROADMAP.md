@@ -13,7 +13,7 @@ the full cohort.
 
 ## Phases
 
-- [ ] **Phase 1: Pipeline bootstrap** — Get webatlas-pipeline (Nextflow) running on HPC against example data; pin versions/containers. [REQ-01]
+- [x] **Phase 1: Pipeline bootstrap** — Get webatlas-pipeline (Nextflow) running on HPC against example data; pin versions/containers. [REQ-01]
 - [ ] **Phase 2: pt2 AnnData assembly (the fusion core)** — Extract + join genes, metabolites, cell type, niche, centroids into per-sample `h5ad`; validate the three-way cell join. [REQ-02, REQ-03]
 - [ ] **Phase 3: webatlas config + Vitessce build (pt2)** — Author params YAML, run pipeline, produce a Vitessce config exposing Gene/Metabolite/Cell type/Niche selectors. [REQ-04, REQ-05]
 - [ ] **Phase 4: Viewer UX — samples, z-planes, feature-type grouping** — Sample switcher, per-z-plane view, palette wiring, distinct Gene vs Metabolite dropdowns. [REQ-06]
@@ -90,7 +90,7 @@ the full cohort.
 
 | Phase | Plans | Status |
 |-------|-------|--------|
-| 1. Pipeline bootstrap | 0/1 | Planned |
+| 1. Pipeline bootstrap | 1/1 | **Complete** (2026-07-20) |
 | 2. pt2 AnnData assembly | 0/2 | Planned |
 | 3. webatlas config + build | 0/? | Roadmapped |
 | 4. Viewer UX | 0/? | Roadmapped |
