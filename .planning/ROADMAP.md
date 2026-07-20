@@ -16,9 +16,9 @@ the full cohort.
 - [x] **Phase 1: Pipeline bootstrap** — Get webatlas-pipeline (Nextflow) running on HPC against example data; pin versions/containers. [REQ-01]
 - [x] **Phase 2: pt2 AnnData assembly (the fusion core)** — Extract + join genes, metabolites, cell type, niche, centroids into per-sample `h5ad`; validate the three-way cell join. [REQ-02, REQ-03]
 - [x] **Phase 3: webatlas config + Vitessce build (pt2)** — Author params YAML, run pipeline, produce a Vitessce config exposing Gene/Metabolite/Cell type/Niche selectors. [REQ-04, REQ-05]
-- [ ] **Phase 4: Viewer UX — samples, z-planes, feature-type grouping** — Sample switcher, per-z-plane view, palette wiring, distinct Gene vs Metabolite dropdowns. [REQ-06]
+- [ ] **Phase 4: Viewer UX — samples, z-planes, feature-type grouping** *(in progress: z-slider done for z1–z3; sample selector pending)* — Sample switcher, per-z-plane view, palette wiring, distinct Gene vs Metabolite dropdowns. [REQ-06]
 - [ ] **Phase 5: Deployment & sharing** — Serve or statically export the pt2 atlas with documented collaborator access. [REQ-07]
-- [ ] **Phase 6: Generalize to full cohort + pt5 metabolites** — Batch the builder across ~29 samples; enable metabolite layer for pt5; graceful absence elsewhere. [REQ-08]
+- [ ] **Phase 6: Generalize to full cohort (15 ST samples; 6 with matched SM)** — Sample selector over all 15 ST samples; MS layer for the 6 matched (ven1–ven6), cleanly absent for the 9 ST-only. [REQ-08, REQ-09, REQ-10, REQ-11]
 
 ## Phase Details
 
@@ -63,7 +63,8 @@ the full cohort.
 **Success Criteria** (what must be TRUE):
   1. A sample switcher lists pt2 samples; selecting one loads its data.
   2. Per-z-plane data (z1..z8) is selectable or visually separable.
-  3. Gene and Metabolite are presented as separate labelled dropdowns (not one merged feature list).
+  3. Gene and Metabolite are presented as separate labelled panels (done: independent obsType/featureType scopes).
+  4. A **sample selector** sits alongside the z slider (spans samples; see Phase 6 for cohort-wide data).
 **Plans**: TBD at plan-time (est. 1–2)
 
 ### Phase 5: Deployment & sharing
@@ -75,16 +76,31 @@ the full cohort.
   2. Data-serving approach (static files vs http server, HPC port-forward vs export) is decided and documented.
 **Plans**: TBD at plan-time (est. 1)
 
-### Phase 6: Generalize to full cohort + pt5 metabolites
-**Goal**: Run the builder across all ~29 samples; enable metabolites for pt5; degrade gracefully where metabolomics is absent.
-**Depends on**: Phase 5 (pilot proven end-to-end)
-**Requirements**: REQ-08, REQ-Q4
+### Phase 6: Generalize to full cohort (15 ST samples; 6 with matched SM)
+**Goal**: Every cohort sample browsable in one viewer, with the metabolite layer
+present only where MS data exists.
+**Depends on**: Phase 5
+**Requirements**: REQ-08, REQ-09, REQ-10, REQ-11, REQ-Q4
+
+**CORRECTED COVERAGE (verified 2026-07-20)** — earlier notes said SM was pt2/pt5
+only; that was based on `integrated/*.rds`. The aligned MS matrices actually exist
+for **all six ven samples**:
+
+| Samples | ST | SM (metabolomics) | Source |
+|---|---|---|---|
+| ven1–ven6 (6) | yes | **yes** | `venture_pt{1..6}/metabolomics_edge_removed/*_with_xy.csv`, pt2 also `aligned_metabolites/` |
+| GL0018, GL0043, GL0048, GL0097, GL0184, GX008, LGG-A/B/C (9) | yes | no | ST only |
+
 **Success Criteria** (what must be TRUE):
-  1. The AnnData builder is parameterized by sample and run (batched under SLURM) across the cohort.
-  2. pt5 gets a Metabolite layer from `integrated_data_250926_2.rds`; samples without metabolomics build cleanly with the Metabolite selector absent.
-  3. The multi-sample atlas config lists all built samples in the switcher.
-  4. Root `.planning/` and semantic `results/` are byte-unchanged.
-**Plans**: TBD at plan-time (est. 2–3)
+  1. A generated **manifest** (sample → z-planes → modalities present) drives the
+     selector; no hard-coded sample lists.
+  2. The **sample selector** lists all 15 ST samples; picking one loads its planes.
+  3. For the 6 matched samples the Metabolite (MS ion-density) panel appears; for
+     the 9 ST-only samples it is cleanly omitted and the layout reflows (no dead panel).
+  4. Per-sample MS alignment is validated (nearest-neighbour distance to cells)
+     and recorded, as done for ven2 z1–z3.
+  5. Root `.planning/` and semantic `results/` byte-unchanged.
+**Plans**: TBD at plan-time (est. 3–4)
 
 ## Progress
 

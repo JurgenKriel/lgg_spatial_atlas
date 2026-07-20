@@ -24,6 +24,17 @@ Requirement IDs are referenced by ROADMAP phases and PLAN frontmatter.
 - **REQ-08** — The AnnData builder generalizes across all ~29 cohort samples;
   Metabolite layer is enabled for pt2 and pt5, gracefully absent elsewhere.
 
+- **REQ-09** — The viewer provides a **sample selector** spanning all cohort ST
+  samples (15: ven1–ven6, GL0018, GL0043, GL0048, GL0097, GL0184, GX008, LGG-A/B/C),
+  in addition to the per-sample z-plane slider.
+- **REQ-10** — A single viewer accommodates **both** matched ST+SM samples and
+  ST-only samples: the Metabolite (MS ion-density) panel is present for the 6
+  matched samples (ven1–ven6) and cleanly absent — not broken/empty — for the 9
+  ST-only samples. Layout must not leave a dead panel.
+- **REQ-11** — Sample/plane availability is driven by a generated manifest
+  (sample → z-planes → which modalities exist), so the selector is data-driven
+  rather than hard-coded.
+
 ## Non-Functional / Quality
 
 - **REQ-Q1** — All heavy steps run under SLURM; large arrays handled via
