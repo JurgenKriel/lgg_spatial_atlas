@@ -45,3 +45,24 @@ Requirement IDs are referenced by ROADMAP phases and PLAN frontmatter.
   counts, matched fraction).
 - **REQ-Q4** — The semantic-analysis root `.planning/` and `results/` are left
   byte-unchanged by this work.
+
+## Milestone 2 — Production viewer (target: gbmspace.org / cellatlas.io quality)
+
+- **REQ-12** — Replace the raw `vitessce.io?url=` iframe with a **self-hosted
+  webatlas-app** frontend (github.com/haniffalab/webatlas-app — what cellatlas.io
+  runs), giving a proper study/dataset browser instead of a bare config URL.
+- **REQ-13** — Add **raster image layers** (H&E and/or IF) per sample/plane as
+  OME-Zarr, so molecular layers overlay real tissue rather than sitting on blank space.
+- **REQ-14** — Add **cell segmentation polygons** (label images) so cells render as
+  true boundaries; this also unlocks webatlas's native spatial view (it only lays out
+  a spatial view when `is_spatial` AND an image exist).
+- **REQ-15** — **Histopathology / region annotations** as a selectable layer,
+  correlated with molecular layers (gbmspace shows annotations per tissue location).
+- **REQ-16** — **Curated views**: named presets (e.g. "manuscript figure N") that open
+  a specific sample/plane/feature/colour configuration.
+- **REQ-17** — **Comparison mode**: view two samples or planes side by side with
+  linked zoom/pan.
+- **REQ-18** — A **landing/about site** (study description, cohort table, methods,
+  citation) wrapping the viewer, as gbmspace.org does.
+- **REQ-19** — **Object-storage hosting** (Cloudflare R2 / S3 + CORS) replacing
+  GitHub Pages; Pages cannot hold the cohort (3 planes of ONE sample = 708MB).

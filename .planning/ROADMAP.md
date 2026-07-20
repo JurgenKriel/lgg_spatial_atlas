@@ -129,3 +129,34 @@ for **all six ven samples**:
 4. **Coordinate frames** — Genes (Seurat), centroids (zarr), and metabolites
    (integrated) must share one coordinate space per sample/z-plane; verify the
    "aligned" metabolomics is in the ST centroid frame.
+
+---
+
+## Milestone 2 — Production viewer
+
+**Goal:** move from the working proof-of-concept to something comparable to
+[gbmspace.org](https://www.gbmspace.org/) (which uses **WebAtlas 2.0** + CELLxGENE)
+and [cellatlas.io webatlas viewer](https://cellatlas.io/studies/webatlas/dataset/140/vitessce)
+(which runs the **webatlas-app** frontend).
+
+**Gap analysis vs those targets (current state = points-only scatterplots in a raw
+vitessce.io iframe):**
+
+| Capability | Target has | We have | Phase |
+|---|---|---|---|
+| Frontend app w/ study+dataset browser | webatlas-app | raw vitessce.io iframe | 7 |
+| Raster tissue image (H&E / IF) | yes | none | 8 |
+| Cell segmentation polygons | yes | centroid points only | 8 |
+| Histopath / region annotations | yes | niche only | 9 |
+| Sample selector across cohort | yes | z-slider, 1 sample | 6 |
+| Curated / manuscript-figure views | yes | none | 9 |
+| Side-by-side comparison | yes | none | 9 |
+| Hosting at cohort scale | CDN/object store | GitHub Pages (708MB for 3 planes) | 10 |
+
+- [ ] **Phase 7: Self-hosted webatlas-app frontend** — deploy webatlas-app; study/dataset browser; replaces the iframe. [REQ-12, REQ-18]
+- [ ] **Phase 8: Image + segmentation layers** — H&E/IF as OME-Zarr raster; cell polygons as label images (also unlocks webatlas's native spatial view). [REQ-13, REQ-14]
+- [ ] **Phase 9: Annotations, curated views, comparison mode** — histopath/region layer; named figure presets; linked side-by-side. [REQ-15, REQ-16, REQ-17]
+- [ ] **Phase 10: Object-storage hosting** — R2/S3 + CORS; retire the Pages size ceiling. [REQ-19]
+
+**Sequencing note:** Phase 10 (hosting) gates 6-9 in practice — the cohort will not
+fit on Pages. Phase 8 is the biggest visual win (tissue context + real cell shapes).
