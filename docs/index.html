@@ -35,7 +35,7 @@
   function url(z){ return "https://vitessce.io/?url=" + cfg(z); }
   var s = document.getElementById("z"), f = document.getElementById("v"),
       lab = document.getElementById("zlabel"), nt = document.getElementById("newtab");
-  var MSFOR={1:"ms z2",2:"ms z1",3:"ms z3"};
+  var MSFOR={1:"ms z1",2:"ms z2",3:"ms z3"};
   function go(){ var z=s.value; lab.textContent="z"+z; f.src=url(z); nt.href=url(z);
     document.getElementById("pairing").textContent="ST z"+z+" \u2194 "+MSFOR[z]; }
   s.addEventListener("input", function(){ lab.textContent="z"+s.value; });

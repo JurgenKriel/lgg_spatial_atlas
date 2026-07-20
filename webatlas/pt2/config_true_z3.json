@@ -9,7 +9,7 @@
       "files": [
         {
           "fileType": "anndata.zarr",
-          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z2-anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/lgg_pt2_atlas-ven2_z3-anndata.zarr",
           "options": {
             "obsEmbedding": [
               {
@@ -57,7 +57,7 @@
       "files": [
         {
           "fileType": "anndata.zarr",
-          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/ms_ven2_z1-anndata.zarr",
+          "url": "https://jurgenkriel.github.io/lgg_spatial_atlas/atlas/ms_ven2_z3-anndata.zarr",
           "options": {
             "obsEmbedding": [
               {
