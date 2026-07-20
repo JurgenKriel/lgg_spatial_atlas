@@ -14,7 +14,7 @@ the full cohort.
 ## Phases
 
 - [x] **Phase 1: Pipeline bootstrap** — Get webatlas-pipeline (Nextflow) running on HPC against example data; pin versions/containers. [REQ-01]
-- [ ] **Phase 2: pt2 AnnData assembly (the fusion core)** — Extract + join genes, metabolites, cell type, niche, centroids into per-sample `h5ad`; validate the three-way cell join. [REQ-02, REQ-03]
+- [x] **Phase 2: pt2 AnnData assembly (the fusion core)** — Extract + join genes, metabolites, cell type, niche, centroids into per-sample `h5ad`; validate the three-way cell join. [REQ-02, REQ-03]
 - [ ] **Phase 3: webatlas config + Vitessce build (pt2)** — Author params YAML, run pipeline, produce a Vitessce config exposing Gene/Metabolite/Cell type/Niche selectors. [REQ-04, REQ-05]
 - [ ] **Phase 4: Viewer UX — samples, z-planes, feature-type grouping** — Sample switcher, per-z-plane view, palette wiring, distinct Gene vs Metabolite dropdowns. [REQ-06]
 - [ ] **Phase 5: Deployment & sharing** — Serve or statically export the pt2 atlas with documented collaborator access. [REQ-07]
@@ -91,7 +91,7 @@ the full cohort.
 | Phase | Plans | Status |
 |-------|-------|--------|
 | 1. Pipeline bootstrap | 1/1 | **Complete** (2026-07-20) |
-| 2. pt2 AnnData assembly | 0/2 | **02-01 done** (join resolved, 100% matched); building AnnData |
+| 2. pt2 AnnData assembly | 2/2 | **Complete** (2026-07-20) — 8 z-plane h5ad, genes+metab+celltype+niche |
 | 3. webatlas config + build | 0/? | Roadmapped |
 | 4. Viewer UX | 0/? | Roadmapped |
 | 5. Deployment | 0/? | Roadmapped |

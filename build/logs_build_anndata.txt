@@ -1,0 +1,9 @@
+  ven2_z1: 40107 cells x 1196 feats (gene+metab); niche 40107/40107
+  ven2_z2: 31386 cells x 1196 feats (gene+metab); niche 31386/31386
+  ven2_z3: 47450 cells x 1196 feats (gene+metab); niche 47450/47450
+  ven2_z4: 42513 cells x 1196 feats (gene+metab); niche 42513/42513
+  ven2_z5: 39834 cells x 1196 feats (gene+metab); niche 39834/39834
+  ven2_z6: 42565 cells x 1196 feats (gene+metab); niche 42565/42565
+  ven2_z7: 42032 cells x 1196 feats (gene+metab); niche 42032/42032
+  ven2_z8: 48508 cells x 1196 feats (gene+metab); niche 48508/48508
+BUILD DONE -> /vast/scratch/users/kriel.j/atlas_pt2/h5ad

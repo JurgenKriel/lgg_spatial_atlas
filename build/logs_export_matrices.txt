@@ -1,0 +1,12 @@
+    SPT layers: data,counts,scale.data.7,scale.data 
+    SPM layers: data,counts,scale.data.7,scale.data 
+full SPT 339x334395 (data); SPM 857x334395 (data)
+  6687_1: 48508 cells
+  6687_2: 42032 cells
+  6694_1: 42565 cells
+  6694_2: 39834 cells
+  6889_1: 42513 cells
+  6889_2: 47450 cells
+  6901_1: 31386 cells
+  6901_2: 40107 cells
+DONE
