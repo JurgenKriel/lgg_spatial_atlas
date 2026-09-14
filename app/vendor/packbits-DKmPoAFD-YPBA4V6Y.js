@@ -1,0 +1,1 @@
+import{da as f}from"/vendor/chunk-GFY6B56Q.js";import"/vendor/chunk-JJQZRYBB.js";var l=class extends f{decodeBlock(r){let o=new DataView(r),s=[];for(let e=0;e<r.byteLength;++e){let t=o.getInt8(e);if(t<0){let n=o.getUint8(e+1);t=-t;for(let a=0;a<=t;++a)s.push(n);e+=1}else{for(let n=0;n<=t;++n)s.push(o.getUint8(e+n+1));e+=t+1}}return new Uint8Array(s).buffer}};export{l as default};

@@ -1,0 +1,1141 @@
+{
+  "inputs": {
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react.production.min.js": {
+      "bytes": 6930,
+      "imports": [],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js": {
+      "bytes": 190,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react.production.min.js",
+          "kind": "require-call",
+          "original": "./cjs/react.production.min.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/scheduler/cjs/scheduler.production.min.js": {
+      "bytes": 4235,
+      "imports": [],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/scheduler/index.js": {
+      "bytes": 198,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/scheduler/cjs/scheduler.production.min.js",
+          "kind": "require-call",
+          "original": "./cjs/scheduler.production.min.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/cjs/react-dom.production.min.js": {
+      "bytes": 131685,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "require-call",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/scheduler/index.js",
+          "kind": "require-call",
+          "original": "scheduler"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/index.js": {
+      "bytes": 1363,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/cjs/react-dom.production.min.js",
+          "kind": "require-call",
+          "original": "./cjs/react-dom.production.min.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/client.js": {
+      "bytes": 619,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/index.js",
+          "kind": "require-call",
+          "original": "react-dom"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/raw-Defupf2k.js": {
+      "bytes": 133,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lzw-BLoRtQR9.js": {
+      "bytes": 2070,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/jpeg-1IKEOMCk.js": {
+      "bytes": 15619,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/pako.esm-D68R8YXe.js": {
+      "bytes": 37143,
+      "imports": [],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/deflate-t1Bbw_mv.js": {
+      "bytes": 208,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/pako.esm-D68R8YXe.js",
+          "kind": "import-statement",
+          "original": "./pako.esm-D68R8YXe.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/packbits-DKmPoAFD.js": {
+      "bytes": 541,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lerc-BfOGSUhe.js": {
+      "bytes": 89286,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/pako.esm-D68R8YXe.js",
+          "kind": "import-statement",
+          "original": "./pako.esm-D68R8YXe.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/webimage-2zaNavvH.js": {
+      "bytes": 801,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/chunk-INHXZS53-DiyuLb3Z.js": {
+      "bytes": 558,
+      "imports": [],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/blosc-DKW2fp0s.js": {
+      "bytes": 611677,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/chunk-INHXZS53-DiyuLb3Z.js",
+          "kind": "import-statement",
+          "original": "./chunk-INHXZS53-DiyuLb3Z.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lz4-D5NbssRf.js": {
+      "bytes": 43888,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/chunk-INHXZS53-DiyuLb3Z.js",
+          "kind": "import-statement",
+          "original": "./chunk-INHXZS53-DiyuLb3Z.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/zstd-DoGJTjDa.js": {
+      "bytes": 754344,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/chunk-INHXZS53-DiyuLb3Z.js",
+          "kind": "import-statement",
+          "original": "./chunk-INHXZS53-DiyuLb3Z.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/troika-three-text.esm-CcUywKUH.js": {
+      "bytes": 179319,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BZJ9RyIM.js": {
+      "bytes": 464169,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/troika-three-text.esm-CcUywKUH.js",
+          "kind": "dynamic-import",
+          "original": "./troika-three-text.esm-CcUywKUH.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/higlass-BKSqNRll.js": {
+      "bytes": 3572854,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/index.js",
+          "kind": "import-statement",
+          "original": "react-dom"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/ReactNeuroglancer-GBLINufF.js": {
+      "bytes": 1685117,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js": {
+      "bytes": 11246371,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/index.js",
+          "kind": "import-statement",
+          "original": "react-dom"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/index.js",
+          "kind": "import-statement",
+          "original": "react-dom"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/raw-Defupf2k.js",
+          "kind": "dynamic-import",
+          "original": "./raw-Defupf2k.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lzw-BLoRtQR9.js",
+          "kind": "dynamic-import",
+          "original": "./lzw-BLoRtQR9.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/jpeg-1IKEOMCk.js",
+          "kind": "dynamic-import",
+          "original": "./jpeg-1IKEOMCk.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/deflate-t1Bbw_mv.js",
+          "kind": "dynamic-import",
+          "original": "./deflate-t1Bbw_mv.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/packbits-DKmPoAFD.js",
+          "kind": "dynamic-import",
+          "original": "./packbits-DKmPoAFD.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lerc-BfOGSUhe.js",
+          "kind": "dynamic-import",
+          "original": "./lerc-BfOGSUhe.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/webimage-2zaNavvH.js",
+          "kind": "dynamic-import",
+          "original": "./webimage-2zaNavvH.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/blosc-DKW2fp0s.js",
+          "kind": "dynamic-import",
+          "original": "./blosc-DKW2fp0s.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lz4-D5NbssRf.js",
+          "kind": "dynamic-import",
+          "original": "./lz4-D5NbssRf.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/zstd-DoGJTjDa.js",
+          "kind": "dynamic-import",
+          "original": "./zstd-DoGJTjDa.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BZJ9RyIM.js",
+          "kind": "dynamic-import",
+          "original": "./index-BZJ9RyIM.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/blosc-DKW2fp0s.js",
+          "kind": "dynamic-import",
+          "original": "./blosc-DKW2fp0s.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lz4-D5NbssRf.js",
+          "kind": "dynamic-import",
+          "original": "./lz4-D5NbssRf.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/zstd-DoGJTjDa.js",
+          "kind": "dynamic-import",
+          "original": "./zstd-DoGJTjDa.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/higlass-BKSqNRll.js",
+          "kind": "dynamic-import",
+          "original": "./higlass-BKSqNRll.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/ReactNeuroglancer-GBLINufF.js",
+          "kind": "dynamic-import",
+          "original": "./ReactNeuroglancer-GBLINufF.js"
+        },
+        {
+          "path": "https://unpkg.com/parquet-wasm@0.6.1/esm/parquet_wasm.js",
+          "kind": "dynamic-import",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index.min.js": {
+      "bytes": 1290,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js",
+          "kind": "import-statement",
+          "original": "./index-BeT5q46I.js"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        }
+      ],
+      "format": "esm"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react-jsx-runtime.production.min.js": {
+      "bytes": 859,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "require-call",
+          "original": "react"
+        }
+      ],
+      "format": "cjs"
+    },
+    "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/jsx-runtime.js": {
+      "bytes": 214,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react-jsx-runtime.production.min.js",
+          "kind": "require-call",
+          "original": "./cjs/react-jsx-runtime.production.min.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "app/src/main.jsx": {
+      "bytes": 5112,
+      "imports": [
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/client.js",
+          "kind": "import-statement",
+          "original": "react-dom/client"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index.min.js",
+          "kind": "import-statement",
+          "original": "vitessce"
+        },
+        {
+          "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "app/vendor/blosc-DKW2fp0s-FW3GREMA.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-J3XP6JJK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/blosc-DKW2fp0s.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/blosc-DKW2fp0s.js": {
+          "bytesInOutput": 603276
+        }
+      },
+      "bytes": 603380
+    },
+    "app/vendor/lz4-D5NbssRf-LCLHXOFQ.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-J3XP6JJK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lz4-D5NbssRf.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lz4-D5NbssRf.js": {
+          "bytesInOutput": 36429
+        }
+      },
+      "bytes": 36533
+    },
+    "app/vendor/zstd-DoGJTjDa-VKKIAAF7.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-J3XP6JJK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/zstd-DoGJTjDa.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/zstd-DoGJTjDa.js": {
+          "bytesInOutput": 747266
+        }
+      },
+      "bytes": 747370
+    },
+    "app/vendor/chunk-J3XP6JJK.js": {
+      "imports": [],
+      "exports": [
+        "a"
+      ],
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/chunk-INHXZS53-DiyuLb3Z.js": {
+          "bytesInOutput": 355
+        }
+      },
+      "bytes": 371
+    },
+    "app/vendor/troika-three-text.esm-CcUywKUH-7NEG76CU.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "GlyphsGeometry",
+        "Text",
+        "configureTextBuilder",
+        "createTextDerivedMaterial",
+        "dumpSDFTextures",
+        "fontResolverWorkerModule",
+        "getCaretAtPoint",
+        "getSelectionRects",
+        "getTextRenderInfo",
+        "preloadFont",
+        "typesetterWorkerModule"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/troika-three-text.esm-CcUywKUH.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/troika-three-text.esm-CcUywKUH.js": {
+          "bytesInOutput": 116903
+        }
+      },
+      "bytes": 118296
+    },
+    "app/vendor/index-BZJ9RyIM-77UZO4A5.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/troika-three-text.esm-CcUywKUH-7NEG76CU.js",
+          "kind": "dynamic-import"
+        }
+      ],
+      "exports": [
+        "SpatialWrapper"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BZJ9RyIM.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BZJ9RyIM.js": {
+          "bytesInOutput": 311932
+        }
+      },
+      "bytes": 313867
+    },
+    "app/vendor/higlass-BKSqNRll-ZOC2YEJF.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "ChromosomeInfo",
+        "HiGlassComponent",
+        "HiGlassTrackComponent",
+        "OPTIONS_INFO",
+        "TRACKS_INFO_BY_TYPE",
+        "debounce",
+        "getDefaultTracksForDatatype",
+        "getTrackByUid",
+        "getTrackObjectFromHGC",
+        "mountHGComponent",
+        "schema",
+        "trackViewer",
+        "version",
+        "viewer",
+        "waitForJsonComplete",
+        "waitForTilesLoaded",
+        "waitForTransitionsFinished"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/higlass-BKSqNRll.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/higlass-BKSqNRll.js": {
+          "bytesInOutput": 2480187
+        }
+      },
+      "bytes": 2489838
+    },
+    "app/vendor/ReactNeuroglancer-GBLINufF-5B7SFJA6.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/ReactNeuroglancer-GBLINufF.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/ReactNeuroglancer-GBLINufF.js": {
+          "bytesInOutput": 1185584
+        }
+      },
+      "bytes": 1191598
+    },
+    "app/vendor/main.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [],
+      "entryPoint": "app/src/main.jsx",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/client.js": {
+          "bytesInOutput": 97
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react-jsx-runtime.production.min.js": {
+          "bytesInOutput": 591
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/jsx-runtime.js": {
+          "bytesInOutput": 46
+        },
+        "app/src/main.jsx": {
+          "bytesInOutput": 2815
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index.min.js": {
+          "bytesInOutput": 16
+        }
+      },
+      "bytes": 4031
+    },
+    "app/vendor/raw-Defupf2k-BXZTOQFI.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/raw-Defupf2k.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/raw-Defupf2k.js": {
+          "bytesInOutput": 48
+        }
+      },
+      "bytes": 151
+    },
+    "app/vendor/lzw-BLoRtQR9-D3C6TPRV.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lzw-BLoRtQR9.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lzw-BLoRtQR9.js": {
+          "bytesInOutput": 1314
+        }
+      },
+      "bytes": 1417
+    },
+    "app/vendor/jpeg-1IKEOMCk-3LEG6Y3N.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/jpeg-1IKEOMCk.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/jpeg-1IKEOMCk.js": {
+          "bytesInOutput": 8760
+        }
+      },
+      "bytes": 8865
+    },
+    "app/vendor/deflate-t1Bbw_mv-WKWSX5EY.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-IRB2VJ3K.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/deflate-t1Bbw_mv.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/deflate-t1Bbw_mv.js": {
+          "bytesInOutput": 74
+        }
+      },
+      "bytes": 223
+    },
+    "app/vendor/packbits-DKmPoAFD-YPBA4V6Y.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/packbits-DKmPoAFD.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/packbits-DKmPoAFD.js": {
+          "bytesInOutput": 280
+        }
+      },
+      "bytes": 383
+    },
+    "app/vendor/lerc-BfOGSUhe-YFGHX3KV.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-IRB2VJ3K.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default",
+        "zstd"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lerc-BfOGSUhe.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/lerc-BfOGSUhe.js": {
+          "bytesInOutput": 63536
+        }
+      },
+      "bytes": 64049
+    },
+    "app/vendor/chunk-IRB2VJ3K.js": {
+      "imports": [],
+      "exports": [
+        "a"
+      ],
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/pako.esm-D68R8YXe.js": {
+          "bytesInOutput": 21058
+        }
+      },
+      "bytes": 21075
+    },
+    "app/vendor/webimage-2zaNavvH-OLLNDAS4.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-GFY6B56Q.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/webimage-2zaNavvH.js",
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/webimage-2zaNavvH.js": {
+          "bytesInOutput": 614
+        }
+      },
+      "bytes": 717
+    },
+    "app/vendor/chunk-GFY6B56Q.js": {
+      "imports": [
+        {
+          "path": "app/vendor/chunk-JJQZRYBB.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "app/vendor/raw-Defupf2k-BXZTOQFI.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/lzw-BLoRtQR9-D3C6TPRV.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/jpeg-1IKEOMCk-3LEG6Y3N.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/deflate-t1Bbw_mv-WKWSX5EY.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/packbits-DKmPoAFD-YPBA4V6Y.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/lerc-BfOGSUhe-YFGHX3KV.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/webimage-2zaNavvH-OLLNDAS4.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/blosc-DKW2fp0s-FW3GREMA.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/lz4-D5NbssRf-LCLHXOFQ.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/zstd-DoGJTjDa-VKKIAAF7.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/index-BZJ9RyIM-77UZO4A5.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/blosc-DKW2fp0s-FW3GREMA.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/lz4-D5NbssRf-LCLHXOFQ.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/zstd-DoGJTjDa-VKKIAAF7.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/higlass-BKSqNRll-ZOC2YEJF.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "app/vendor/ReactNeuroglancer-GBLINufF-5B7SFJA6.js",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "https://unpkg.com/parquet-wasm@0.6.1/esm/parquet_wasm.js",
+          "kind": "dynamic-import",
+          "external": true
+        }
+      ],
+      "exports": [
+        "$",
+        "$a",
+        "$b",
+        "A",
+        "Aa",
+        "Ab",
+        "B",
+        "Ba",
+        "Bb",
+        "C",
+        "Ca",
+        "Cb",
+        "D",
+        "Da",
+        "Db",
+        "E",
+        "Ea",
+        "Eb",
+        "F",
+        "Fa",
+        "Fb",
+        "G",
+        "Ga",
+        "Gb",
+        "H",
+        "Ha",
+        "Hb",
+        "I",
+        "Ia",
+        "Ib",
+        "J",
+        "Ja",
+        "Jb",
+        "K",
+        "Ka",
+        "Kb",
+        "L",
+        "La",
+        "Lb",
+        "M",
+        "Ma",
+        "Mb",
+        "N",
+        "Na",
+        "Nb",
+        "O",
+        "Oa",
+        "Ob",
+        "P",
+        "Pa",
+        "Pb",
+        "Q",
+        "Qa",
+        "Qb",
+        "R",
+        "Ra",
+        "Rb",
+        "S",
+        "Sa",
+        "Sb",
+        "T",
+        "Ta",
+        "Tb",
+        "U",
+        "Ua",
+        "Ub",
+        "V",
+        "Va",
+        "Vb",
+        "W",
+        "Wa",
+        "Wb",
+        "X",
+        "Xa",
+        "Xb",
+        "Y",
+        "Ya",
+        "Yb",
+        "Z",
+        "Za",
+        "Zb",
+        "_",
+        "_a",
+        "_b",
+        "a",
+        "aa",
+        "ab",
+        "ac",
+        "b",
+        "ba",
+        "bb",
+        "bc",
+        "c",
+        "ca",
+        "cb",
+        "cc",
+        "d",
+        "da",
+        "db",
+        "dc",
+        "e",
+        "ea",
+        "eb",
+        "f",
+        "fa",
+        "fb",
+        "g",
+        "ga",
+        "gb",
+        "h",
+        "ha",
+        "hb",
+        "i",
+        "ia",
+        "ib",
+        "j",
+        "ja",
+        "jb",
+        "k",
+        "ka",
+        "kb",
+        "l",
+        "la",
+        "lb",
+        "m",
+        "ma",
+        "mb",
+        "n",
+        "na",
+        "nb",
+        "o",
+        "oa",
+        "ob",
+        "p",
+        "pa",
+        "pb",
+        "q",
+        "qa",
+        "qb",
+        "r",
+        "ra",
+        "rb",
+        "s",
+        "sa",
+        "sb",
+        "t",
+        "ta",
+        "tb",
+        "u",
+        "ua",
+        "ub",
+        "v",
+        "va",
+        "vb",
+        "w",
+        "wa",
+        "wb",
+        "x",
+        "xa",
+        "xb",
+        "y",
+        "ya",
+        "yb",
+        "z",
+        "za",
+        "zb"
+      ],
+      "inputs": {
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react.production.min.js": {
+          "bytesInOutput": 6690
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js": {
+          "bytesInOutput": 55
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/scheduler/cjs/scheduler.production.min.js": {
+          "bytesInOutput": 4059
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/scheduler/index.js": {
+          "bytesInOutput": 56
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/cjs/react-dom.production.min.js": {
+          "bytesInOutput": 131643
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/index.js": {
+          "bytesInOutput": 261
+        },
+        "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index-BeT5q46I.js": {
+          "bytesInOutput": 8343070
+        }
+      },
+      "bytes": 8493799
+    },
+    "app/vendor/chunk-JJQZRYBB.js": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b"
+      ],
+      "inputs": {},
+      "bytes": 544
+    }
+  }
+}

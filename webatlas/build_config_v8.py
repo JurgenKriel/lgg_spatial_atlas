@@ -5,6 +5,22 @@ import sys, json
 from vitessce import VitessceConfig, ViewType as vt, AnnDataWrapper, CoordinationType as ct
 
 CELL_Z, MS_Z, OUT, PAL = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+
+# Optional 5th arg: the deploy base URL (component D-5). Passing bare store
+# names plus a base means the host is no longer baked into the config, so one
+# build targets GitHub Pages, the Nectar VM, or a future object store without a
+# rebuild. A fully-qualified or root-relative URL is passed through untouched,
+# so every existing invocation behaves exactly as before.
+BASE = sys.argv[5] if len(sys.argv) > 5 else ""
+
+
+def resolve(u):
+    if not BASE or u.startswith(("http://", "https://", "/")):
+        return u
+    return BASE.rstrip("/") + "/" + u.lstrip("/")
+
+
+CELL_Z, MS_Z = resolve(CELL_Z), resolve(MS_Z)
 pal = json.load(open(PAL))
 def rgb(hx, fb="#888888"):
     hx=(hx or fb).lstrip("#"); hx = hx if len(hx)==6 else fb.lstrip("#")

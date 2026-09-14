@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Venture Atlas</title>
+<!--
+  Self-hosted viewer (component E-1). Every asset below is served from this
+  origin: no vitessce.io iframe, no CDN. That is what allows one nginx
+  basic-auth block to cover the app and all Zarr chunks alike, and it is
+  verified by deploy/smoke_test.sh.
+-->
+<link rel="stylesheet" href="/vendor/main.css">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: #0f172a; color: #e2e8f0;
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    overflow: hidden;
+  }
+  .bar {
+    display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap;
+    padding: .75rem 1.1rem; height: 74px;
+    border-bottom: 1px solid #1e293b; background: #0f172a;
+  }
+  .bar h1 { font-size: 1rem; font-weight: 650; margin: 0; white-space: nowrap; }
+  .ctl { display: flex; align-items: center; gap: .6rem; }
+  .ctl label { color: #94a3b8; font-size: .82rem; }
+  input[type=range] { width: 190px; accent-color: #38bdf8; }
+  .zval {
+    font-variant-numeric: tabular-nums; font-weight: 700;
+    color: #38bdf8; min-width: 2.2rem;
+  }
+  .meta { color: #94a3b8; font-size: .82rem; }
+  .meta.rel { margin-left: auto; font-family: ui-monospace, monospace; font-size: .74rem; color: #64748b; }
+  .stage { position: relative; background: #000; }
+  .msg {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: .4rem;
+    color: #94a3b8; text-align: center; padding: 2rem;
+  }
+  .msg.err { color: #fca5a5; }
+  .msg p { max-width: 46ch; margin: 0; }
+  :focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+  @media (max-width: 640px) { .bar { height: auto; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<noscript>This viewer requires JavaScript.</noscript>
+<script type="module" src="/vendor/main.js"></script>
+</body>
+</html>
