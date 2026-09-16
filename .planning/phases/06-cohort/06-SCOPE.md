@@ -271,3 +271,23 @@ This does **not** resolve section 3.4; the z3-z8 pairing question stands.
 2. Confirm Vitessce renders in a browser - the one thing never verified here.
 3. lu.t on the ven3-ven6 aligned files (section 3.1), after which those patients'
    MS drops in as a data change with no code change.
+
+
+---
+
+## Sizing correction, 2026-09-16 (after the log1p fix)
+
+The release grew from **2.1 GB to 3.6 GB** when `X` moved to `log1p(counts)`.
+Raw counts are small integers and compress very well; log1p turns them into
+floats with long mantissas that do not. The +71% is the price of a gene
+expression map that is actually readable — with raw counts, p99 was 6 against a
+max of 75, so a handful of extreme cells saturated the scale and every gene
+looked the same.
+
+3.6 GB is still an order of magnitude under the ~20 GB first extrapolated from
+the pilot, still fits a trial instance's 30 GB root disk, and leaves the 100 GB
+volume request comfortably over-provisioned for this phase.
+
+If size ever matters more than fidelity, the lever is quantising the transformed
+values (log1p output spans 0-4.4, so float16 or a scaled uint8 would be ample)
+rather than reverting to counts.

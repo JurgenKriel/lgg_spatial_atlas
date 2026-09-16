@@ -119,3 +119,23 @@ Three consequences worth acting on:
 The finer-chunking question above is correspondingly less urgent — 391 KB per
 feature selection is already acceptable, and spending object count to shave it
 further would now be premature.
+
+
+---
+
+## Sizing correction, 2026-09-16 (after the log1p fix)
+
+The release grew from **2.1 GB to 3.6 GB** when `X` moved to `log1p(counts)`.
+Raw counts are small integers and compress very well; log1p turns them into
+floats with long mantissas that do not. The +71% is the price of a gene
+expression map that is actually readable — with raw counts, p99 was 6 against a
+max of 75, so a handful of extreme cells saturated the scale and every gene
+looked the same.
+
+3.6 GB is still an order of magnitude under the ~20 GB first extrapolated from
+the pilot, still fits a trial instance's 30 GB root disk, and leaves the 100 GB
+volume request comfortably over-provisioned for this phase.
+
+If size ever matters more than fidelity, the lever is quantising the transformed
+values (log1p output spans 0-4.4, so float16 or a scaled uint8 would be ample)
+rather than reverting to counts.
