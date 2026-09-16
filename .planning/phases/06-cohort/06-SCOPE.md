@@ -184,18 +184,20 @@ almost nowhere; most of this is threading arguments through.
 
 ---
 
-## 5. Sizing
+## 5. Sizing — measured, not estimated
 
-The pilot measures 708 MB / 1,404 objects for three planes of one patient. The
-cohort is 66 sections and 7.15M cells, but composition varies: ST-only sections
-carry 307 gene columns against the pilot's 1,196 fused columns, so they are far
-cheaper per cell.
+Two sections built through the real pipeline: `ven2_z1` (41,726 cells) stores in
+**8 MB**; `GL0018_2` (351,578 cells) in **78 MB** — about 220 bytes per cell.
 
-Order of magnitude **~20 GB at float64, ~10 GB at float32**, with ven3/ven4/ven6
-dominating on cell count. The 100 GB volume in the allocation request stands with
-comfortable headroom — which Phase 8's tissue rasters will consume, not this.
+Across 7.15M cells that is **~1.6 GB for the whole cohort's cells**, plus ~700 MB
+for ven2's MS planes: **~2.5 GB total**, against the ~20 GB extrapolated from the
+pilot. The pilot stored a comparable plane in 127 MB; the cohort build does it in
+8 MB, because the cells store carries 307 genes rather than 1,196 fused
+gene+metabolite features, and float32 rather than float64.
 
----
+The 100 GB volume request stands unchanged — it is now well over-provisioned for
+this phase, which is the right direction, and Phase 8's tissue rasters will
+consume it. Notably the cohort would fit on a trial instance's 30 GB root disk.
 
 ## 6. First cohort release — AGREED 2026-09-16
 

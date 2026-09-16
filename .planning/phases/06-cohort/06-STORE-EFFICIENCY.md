@@ -76,3 +76,46 @@ image layers will later consume. No change needed to the submitted numbers.
 ---
 
 *Phase 6 — companion to `06-SCOPE.md` and `06-VIEWER-ARCHITECTURE.md`.*
+
+
+---
+
+## MEASURED, 2026-09-16 — the estimate above was 10x too pessimistic
+
+Two sections built through the real cohort pipeline:
+
+| Section | Cells | Stored | Bytes/cell | Objects |
+|---|---|---|---|---|
+| `ven2_z1` | 41,726 | **8 MB** | 192 | 137 |
+| `GL0018_2` | 351,578 | **78 MB** | 222 | 344 |
+
+The pilot stored a comparable plane in **127 MB**. The cohort build produces the
+same plane in **8 MB** — a 16x reduction, from two compounding changes:
+
+1. **307 genes, not 1,196 features.** The pilot fused metabolites into `X`
+   alongside genes. The cohort cells store carries genes only; MS is a separate
+   store, which is also what lets an ST-only section exist at all.
+2. **float32, not float64** — the lever predicted above, now applied.
+
+### What the cohort actually costs
+
+At ~220 bytes/cell across 7.15M cells: **~1.6 GB for every cell in the cohort**,
+plus ~700 MB for ven2's eight MS planes. Call it **~2.5 GB** for the first
+release — against the ~20 GB estimated from the pilot.
+
+Three consequences worth acting on:
+
+- **The atlas fits on a trial instance's 30 GB root disk**, with room to spare.
+  The cohort was never the reason to need a volume.
+- **The 100 GB volume request is now heavily over-provisioned for this phase** —
+  which is fine, it was deliberately conservative, and Phase 8's pyramidal
+  tissue rasters are what will actually consume it. No change to the submitted
+  allocation.
+- **Egress per interaction dropped 4.4x.** The smoke test measures a feature
+  chunk at **391 KB**, where the pilot's was 1.7 MB. Against Nectar's
+  1 GB/core/month off-net quota that materially changes the arithmetic: a cold
+  reviewer session is now a fraction of what §G-1 assumed.
+
+The finer-chunking question above is correspondingly less urgent — 391 KB per
+feature selection is already acceptable, and spending object count to shave it
+further would now be premature.
