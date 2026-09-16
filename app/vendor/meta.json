@@ -429,7 +429,7 @@
       "format": "cjs"
     },
     "app/src/main.jsx": {
-      "bytes": 9832,
+      "bytes": 10110,
       "imports": [
         {
           "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
@@ -676,13 +676,13 @@
           "bytesInOutput": 46
         },
         "app/src/main.jsx": {
-          "bytesInOutput": 5444
+          "bytesInOutput": 5422
         },
         "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index.min.js": {
           "bytesInOutput": 16
         }
       },
-      "bytes": 6661
+      "bytes": 6639
     },
     "app/vendor/raw-Defupf2k-BXZTOQFI.js": {
       "imports": [

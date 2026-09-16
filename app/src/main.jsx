@@ -158,7 +158,11 @@ function Shell() {
     if (!manifest || !section?.config) return;
     let cancelled = false;
     setConfig(null);
-    fetch(`${DATA_ROOT}/${manifest.version}/${section.config}`, { cache: 'force-cache' })
+    // 'default', not 'force-cache': release paths are versioned and the server
+    // marks them immutable, so this still caches well in production — but
+    // force-cache would keep serving a stale config after an in-place rebuild,
+    // which is exactly what happens while iterating on a release.
+    fetch(`${DATA_ROOT}/${manifest.version}/${section.config}`)
       .then((r) => { if (!r.ok) throw new Error(`config ${r.status}`); return r.json(); })
       .then((c) => { if (!cancelled) setConfig(rebaseConfig(c, manifest.version)); })
       .catch((e) => { if (!cancelled) setError(`Could not load ${section.id} (${e.message}).`); });

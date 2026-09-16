@@ -23,6 +23,7 @@ Usage:
 """
 import argparse
 import json
+import os
 import re
 import sys
 
@@ -40,6 +41,9 @@ def parse_args(argv):
     ap.add_argument("base", nargs="?", default="")
     ap.add_argument("--sample", default=None)
     ap.add_argument("--z", default=None)
+    ap.add_argument("--release-dir", default=None,
+                    help="where the stores live, for checking which embeddings "
+                         "exist (default: the directory of OUT)")
     return ap.parse_args(argv)
 
 
@@ -53,6 +57,44 @@ def infer_sample_z(store):
     if m:
         return m.group(1), int(m.group(2))
     return None, None
+
+
+def available_embeddings(store, release_dir):
+    """Which obsm/* embeddings the store ACTUALLY contains.
+
+    Declaring an embedding that is not there makes Vitessce fail to load the
+    dataset and render nothing — a blank panel with no obvious cause. The pilot
+    declared obsm/X_umap and got away with it only because the Nextflow step
+    (compute_embeddings: True) created it; a build that writes zarr directly
+    never does. So read the store rather than assume.
+
+    Returns None when the store cannot be inspected, and the caller then falls
+    back to spatial alone, which every store has.
+    """
+    name = store.rstrip("/").split("/")[-1]
+    path = os.path.join(release_dir or ".", name, ".zmetadata")
+    try:
+        with open(path) as fh:
+            meta = json.load(fh)["metadata"]
+    except (OSError, KeyError, ValueError):
+        return None
+    found = set()
+    for key in meta:
+        m = re.match(r"^obsm/([^/]+)/\.zarray$", key)
+        if m:
+            found.add(m.group(1))
+    return found
+
+
+def embedding_args(store, release_dir, candidates):
+    avail = available_embeddings(store, release_dir)
+    if avail is None:
+        pairs = [(p, n) for p, n in candidates if p.endswith("spatial")]
+    else:
+        pairs = [(p, n) for p, n in candidates if p.split("/")[-1] in avail]
+    if not pairs:
+        raise SystemExit(f"{store}: no usable embedding found (need at least obsm/spatial)")
+    return [p for p, _ in pairs], [n for _, n in pairs]
 
 
 def rgb(hx, fb="#888888"):
@@ -79,7 +121,15 @@ def main(argv):
         sample = a.sample
     if a.z is not None:
         z = int(a.z)
-    label = f"{sample or 'sample'}" + (f" z{z}" if z is not None else "")
+    # Don't append "z2" when the sample id already ends in _z2.
+    base = f"{sample or 'sample'}"
+    label = base if (z is None or base.endswith(f"_z{z}")) else f"{base} z{z}"
+
+    release_dir = a.release_dir or os.path.dirname(os.path.abspath(a.out))
+    cell_paths, cell_names = embedding_args(
+        a.cells, release_dir,
+        [("obsm/spatial", "Spatial"), ("obsm/X_umap", "UMAP")])
+    print(f"   embeddings : {', '.join(cell_names)}")
 
     pal = json.load(open(a.pal))
 
@@ -95,8 +145,8 @@ def main(argv):
     # --- dataset A: Xenium cells, featureType 'gene' -------------------------
     w_cells = AnnDataWrapper(
         adata_url=cells_url,
-        obs_embedding_paths=["obsm/spatial", "obsm/X_umap"],
-        obs_embedding_names=["Spatial", "UMAP"],
+        obs_embedding_paths=cell_paths,
+        obs_embedding_names=cell_names,
         obs_set_paths=["obs/cell_type", "obs/niche"],
         obs_set_names=["Cell Type", "Niche"],
         obs_feature_matrix_path="X",
