@@ -29,10 +29,18 @@ const DATA_ROOT = '/data';
 /**
  * Built configs carry absolute URLs for whichever host they were generated
  * against. Every store sits flat inside a release directory, so rewriting each
- * `url` to /data/<version>/<basename> makes one build deployable on any host
- * without a rebuild — and keeps every fetch same-origin.
+ * `url` to point at this origin makes one build deployable on any host without
+ * a rebuild — and keeps every fetch same-origin, which is what lets a single
+ * basic-auth block cover the app and the data alike.
+ *
+ * The rewrite must produce an ABSOLUTE url. Vitessce resolves store urls with
+ * `new URL(u)` and no base, which throws on a root-relative path
+ * ("/data/... is not a valid URL") and leaves the panel blank. Using
+ * window.location.origin keeps it same-origin while staying parseable, and
+ * adapts to whatever host is serving — localhost over a tunnel, or the VM.
  */
 function rebaseConfig(node, version) {
+  const origin = window.location.origin;
   const rebase = (u) => {
     if (typeof u !== 'string' || !u) return u;
     let path = u;
@@ -40,7 +48,7 @@ function rebaseConfig(node, version) {
       try { path = new URL(u).pathname; } catch { return u; }
     }
     const name = path.split('/').filter(Boolean).pop();
-    return name ? `${DATA_ROOT}/${version}/${name}` : u;
+    return name ? `${origin}${DATA_ROOT}/${version}/${name}` : u;
   };
   const walk = (n) => {
     if (Array.isArray(n)) return n.map(walk);
