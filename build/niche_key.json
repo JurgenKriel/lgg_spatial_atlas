@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Canonical spatial-niche labels for the Venture IDH-mutant glioma cohort.",
+    "Data uses the underscore code form (T_LE); figures and reader-facing text use",
+    "the hyphen display form (T-LE). The atlas legend shows `identity` so that a",
+    "reader outside the lab can interpret the label.",
+    "Source: project niche key, provided 2026-05-06."
+  ],
+  "niches": {
+    "T_LE":  {"display": "T-LE",  "identity": "Leading edge"},
+    "T_AMN": {"display": "T-AMN", "identity": "AC/MES enriched, NPC-like / neuronal tumour"},
+    "T_P":   {"display": "T-P",   "identity": "Progenitor-enriched tumour"},
+    "V":     {"display": "V",     "identity": "Vascular"},
+    "T_A":   {"display": "T-A",   "identity": "AC-enriched tumour (less microglia)"},
+    "T_M":   {"display": "T-M",   "identity": "Macrophage-infiltrated tumour"},
+    "I":     {"display": "I",     "identity": "Immune"},
+    "N":     {"display": "N",     "identity": "Normal"},
+    "T_TC":  {"display": "T-TC",  "identity": "T-cell-infiltrated tumour"},
+    "T_O":   {"display": "T-O",   "identity": "OPC-enriched tumour"},
+    "T_OM":  {"display": "T-OM",  "identity": "OPC-enriched, macrophage-enriched tumour"},
+    "T_AA":  {"display": "T-AA",  "identity": "Astro/AC-enriched, microglia-enriched tumour"}
+  }
+}

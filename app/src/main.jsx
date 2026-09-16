@@ -1,15 +1,24 @@
 /**
- * Venture Atlas viewer — self-hosted Vitessce (component E-1).
+ * Venture Atlas viewer — self-hosted Vitessce, cohort-scale (E-1, REQ-09/10/11).
  *
- * WHY THIS EXISTS
- * The previous viewer iframed `https://vitessce.io/?url=<our config>`, which
- * means a third-party origin fetched our data. That is incompatible with the
- * review gate: vitessce.io cannot send our basic-auth credentials, and a
- * cross-origin credentialed request will not pass. Bundling Vitessce and
- * serving it from our own origin makes app and data same-origin, so one nginx
- * auth block covers both and CORS disappears from the problem entirely.
+ * WHY SELF-HOSTED
+ * The original viewer iframed `https://vitessce.io/?url=<our config>`, so a
+ * third-party origin fetched our data. That is incompatible with the review
+ * gate: vitessce.io cannot send our basic-auth credentials. Bundling Vitessce
+ * and serving it same-origin means one nginx auth block covers app and data
+ * alike, and CORS leaves the problem entirely.
  *
- * It also removes a runtime dependency on someone else's uptime and version.
+ * WHY TWO AXES
+ * The cohort has two genuinely different shapes. The ven series are serial
+ * z-stacks of one tissue block — the axis is DEPTH, and a slider is right. The
+ * GL/GX/LGG patients are flat sections taken at different CLINICAL TIMEPOINTS
+ * (primary vs recurrent, split by treatment), frequently different specimens —
+ * the axis is TIME, and a slider would imply a spatial relationship that does
+ * not exist. The manifest carries the axis; this component honours it.
+ *
+ * One Vitessce config per section, fetched lazily — never a single
+ * multi-dataset config, which would make Vitessce instantiate a loader for
+ * every section in the cohort to display one.
  */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -18,11 +27,10 @@ import { Vitessce } from 'vitessce';
 const DATA_ROOT = '/data';
 
 /**
- * Built configs carry absolute URLs baked in for whichever host they were
- * generated against (originally GitHub Pages). Every store sits flat inside a
- * release directory, so rewriting each `url` to /data/<version>/<basename>
- * makes a single build deployable on any host without a rebuild — and keeps
- * every fetch same-origin.
+ * Built configs carry absolute URLs for whichever host they were generated
+ * against. Every store sits flat inside a release directory, so rewriting each
+ * `url` to /data/<version>/<basename> makes one build deployable on any host
+ * without a rebuild — and keeps every fetch same-origin.
  */
 function rebaseConfig(node, version) {
   const rebase = (u) => {
@@ -46,11 +54,67 @@ function rebaseConfig(node, version) {
   return walk(node);
 }
 
+/** Tolerate an older manifest rather than render a blank page. */
+function normalise(m) {
+  if (!m) return null;
+  if (Array.isArray(m.patients)) return m;
+  const src = Array.isArray(m.samples) && typeof m.samples[0] === 'object'
+    ? m.samples
+    : [];
+  const patients = src.map((s) => ({
+    id: s.id,
+    label: s.label ?? s.id,
+    axis: 'z',
+    modalities: s.modalities ?? [],
+    n_sections: (s.planes ?? []).length,
+    sections: (s.planes ?? []).map((p) => ({
+      id: `${s.id}_z${p.z}`, label: `z${p.z}`, axis: 'z', order: p.z, ...p,
+    })),
+  }));
+  return { ...m, patients, legend: m.legend ?? {} };
+}
+
+const readUrl = () => {
+  const q = new URLSearchParams(window.location.search);
+  return { patient: q.get('patient'), section: q.get('section') };
+};
+
+function writeUrl(patient, section) {
+  const q = new URLSearchParams(window.location.search);
+  if (patient) q.set('patient', patient); else q.delete('patient');
+  if (section) q.set('section', section); else q.delete('section');
+  window.history.replaceState(null, '', `${window.location.pathname}?${q}`);
+}
+
+function NicheKey({ legend, onClose }) {
+  const entries = Object.entries(legend?.niche ?? {}).filter(([, v]) => v?.identity);
+  if (!entries.length) return null;
+  return (
+    <div className="keypanel" role="dialog" aria-label="Niche key">
+      <div className="keyhead">
+        <strong>Spatial niches</strong>
+        <button type="button" onClick={onClose} aria-label="Close niche key">×</button>
+      </div>
+      <ul>
+        {entries.map(([code, v]) => (
+          <li key={code}>
+            <span className="sw" style={{ background: v.color }} aria-hidden="true" />
+            <b>{code}</b>
+            <span className="id">{v.identity}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function Shell() {
   const [manifest, setManifest] = useState(null);
-  const [z, setZ] = useState(null);
+  const [patientId, setPatientId] = useState(null);
+  const [sectionId, setSectionId] = useState(null);
   const [config, setConfig] = useState(null);
   const [error, setError] = useState(null);
+  const [showKey, setShowKey] = useState(false);
   const [height, setHeight] = useState(() => Math.max(420, window.innerHeight - 74));
 
   useEffect(() => {
@@ -59,79 +123,135 @@ function Shell() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // The manifest drives the plane list — nothing about samples or z-planes is
-  // hard-coded here, which is what Phase 6's cohort selector will extend.
   useEffect(() => {
     fetch(`${DATA_ROOT}/current/manifest.json`, { cache: 'no-store' })
-      .then((r) => {
-        if (!r.ok) throw new Error(`manifest ${r.status}`);
-        return r.json();
-      })
-      .then((m) => {
+      .then((r) => { if (!r.ok) throw new Error(`manifest ${r.status}`); return r.json(); })
+      .then((raw) => {
+        const m = normalise(raw);
+        if (!m?.patients?.length) throw new Error('manifest lists no patients');
         setManifest(m);
-        const first = m.planes?.find((p) => p.config) ?? m.planes?.[0];
-        if (first) setZ(first.z);
-        else setError('The manifest lists no planes with a config.');
+        const want = readUrl();
+        const p = m.patients.find((x) => x.id === want.patient) ?? m.patients[0];
+        setPatientId(p.id);
+        const s = p.sections.find((x) => x.id === want.section) ?? p.sections[0];
+        setSectionId(s ? s.id : null);
       })
-      .catch((e) => setError(`Could not load the release manifest (${e.message}). Has a release been synced?`));
+      .catch((e) => setError(
+        `Could not load the release manifest (${e.message}). Has a release been synced?`,
+      ));
   }, []);
 
-  const plane = useMemo(
-    () => manifest?.planes?.find((p) => p.z === z) ?? null,
-    [manifest, z],
+  const patient = useMemo(
+    () => manifest?.patients.find((p) => p.id === patientId) ?? null,
+    [manifest, patientId],
+  );
+  const sections = patient?.sections ?? [];
+  const section = useMemo(
+    () => sections.find((s) => s.id === sectionId) ?? null,
+    [sections, sectionId],
   );
 
+  useEffect(() => { if (patientId && sectionId) writeUrl(patientId, sectionId); },
+    [patientId, sectionId]);
+
   useEffect(() => {
-    if (!manifest || !plane?.config) return;
+    if (!manifest || !section?.config) return;
+    let cancelled = false;
     setConfig(null);
-    fetch(`${DATA_ROOT}/${manifest.version}/${plane.config}`, { cache: 'force-cache' })
-      .then((r) => {
-        if (!r.ok) throw new Error(`config ${r.status}`);
-        return r.json();
-      })
-      .then((c) => setConfig(rebaseConfig(c, manifest.version)))
-      .catch((e) => setError(`Could not load the config for z${plane.z} (${e.message}).`));
-  }, [manifest, plane]);
+    fetch(`${DATA_ROOT}/${manifest.version}/${section.config}`, { cache: 'force-cache' })
+      .then((r) => { if (!r.ok) throw new Error(`config ${r.status}`); return r.json(); })
+      .then((c) => { if (!cancelled) setConfig(rebaseConfig(c, manifest.version)); })
+      .catch((e) => { if (!cancelled) setError(`Could not load ${section.id} (${e.message}).`); });
+    return () => { cancelled = true; };
+  }, [manifest, section]);
 
-  const onSlide = useCallback((e) => setZ(Number(e.target.value)), []);
+  const onPatient = useCallback((e) => {
+    const next = manifest.patients.find((p) => p.id === e.target.value);
+    if (!next) return;
+    setError(null);
+    setPatientId(next.id);
+    setSectionId(next.sections[0]?.id ?? null);
+  }, [manifest]);
 
-  const planes = manifest?.planes ?? [];
-  const zs = planes.map((p) => p.z);
-  const hasMS = Boolean(plane?.ms_zarr);
+  const onSection = useCallback((e) => setSectionId(e.target.value), []);
+  const onSlide = useCallback((e) => {
+    const s = sections[Number(e.target.value)];
+    if (s) setSectionId(s.id);
+  }, [sections]);
+
+  const idx = Math.max(0, sections.findIndex((s) => s.id === sectionId));
+  const isDepth = patient?.axis === 'z';
+  const many = sections.length > 1;
+  const hasMS = Boolean(section?.ms_zarr);
+  const patientHasMS = (patient?.modalities ?? []).includes('ms');
 
   return (
     <>
       <header className="bar">
-        <h1>Venture Atlas — {plane?.sample ?? 'pt2'}</h1>
-        {zs.length > 1 && (
+        <h1>Venture Atlas</h1>
+
+        {manifest && (
+          <div className="ctl">
+            <label htmlFor="patient">Patient</label>
+            <select id="patient" value={patientId ?? ''} onChange={onPatient}>
+              {manifest.patients.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.label}
+                  {p.grade ? ` (${p.grade})` : ''}
+                  {` · ${p.n_sections} ${p.axis === 'z' ? 'planes' : 'sections'}`}
+                  {(p.modalities ?? []).includes('ms') ? ' · +MS' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* A depth slider only where depth is real. Clinical timepoints get a
+            list: sliding between a primary and a recurrent specimen would imply
+            a spatial continuity that does not exist. */}
+        {many && isDepth && (
           <div className="ctl">
             <label htmlFor="z">Z-plane</label>
             <input
-              id="z" type="range" min={Math.min(...zs)} max={Math.max(...zs)}
-              step={1} value={z ?? Math.min(...zs)} onChange={onSlide}
-              list="zticks"
+              id="z" type="range" min={0} max={sections.length - 1} step={1}
+              value={idx} onChange={onSlide}
             />
-            <datalist id="zticks">{zs.map((v) => <option key={v} value={v} />)}</datalist>
-            <span className="zval">z{z}</span>
+            <span className="zval">{section?.label}</span>
           </div>
         )}
+        {many && !isDepth && (
+          <div className="ctl">
+            <label htmlFor="section">Section</label>
+            <select id="section" value={sectionId ?? ''} onChange={onSection}>
+              {sections.map((s) => (
+                <option key={s.id} value={s.id}>{s.label}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
         <span className="meta">
-          left: cells (gene / cell type / niche)
-          {hasMS ? ' · right: MS ion density (m/z)' : ' · no MS layer for this plane'}
+          {section?.n_cells ? `${section.n_cells.toLocaleString()} cells · ` : ''}
+          {hasMS ? 'cells + MS ion density' : 'cells only'}
+          {patientHasMS && !hasMS ? ' (no MS for this section)' : ''}
         </span>
+
+        {manifest?.legend?.niche && (
+          <button type="button" className="keybtn" onClick={() => setShowKey((v) => !v)}>
+            Niche key
+          </button>
+        )}
         <span className="meta rel">{manifest?.version}</span>
       </header>
 
       <main className="stage" style={{ height }}>
         {error && <div className="msg err"><strong>Problem loading the atlas.</strong><p>{error}</p></div>}
-        {!error && !config && <div className="msg"><p>Loading z{z}…</p></div>}
-        {!error && config && (
-          <Vitessce config={config} theme="dark" height={height} />
-        )}
+        {!error && !config && <div className="msg"><p>Loading {section?.id ?? '…'}…</p></div>}
+        {!error && config && <Vitessce config={config} theme="dark" height={height} />}
+        {showKey && <NicheKey legend={manifest.legend} onClose={() => setShowKey(false)} />}
       </main>
     </>
   );
 }
 
-const el = document.getElementById('root');
-createRoot(el).render(<Shell />);
+createRoot(document.getElementById('root')).render(<Shell />);

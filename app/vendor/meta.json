@@ -429,7 +429,7 @@
       "format": "cjs"
     },
     "app/src/main.jsx": {
-      "bytes": 5112,
+      "bytes": 9832,
       "imports": [
         {
           "path": "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/index.js",
@@ -667,7 +667,7 @@
       "entryPoint": "app/src/main.jsx",
       "inputs": {
         "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react-dom/client.js": {
-          "bytesInOutput": 97
+          "bytesInOutput": 98
         },
         "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/react/cjs/react-jsx-runtime.production.min.js": {
           "bytesInOutput": 591
@@ -676,13 +676,13 @@
           "bytesInOutput": 46
         },
         "app/src/main.jsx": {
-          "bytesInOutput": 2815
+          "bytesInOutput": 5444
         },
         "../../../../../../scratch/users/kriel.j/vitessce_build/node_modules/vitessce/dist/index.min.js": {
           "bytesInOutput": 16
         }
       },
-      "bytes": 4031
+      "bytes": 6661
     },
     "app/vendor/raw-Defupf2k-BXZTOQFI.js": {
       "imports": [

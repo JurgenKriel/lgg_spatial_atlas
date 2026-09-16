@@ -34,8 +34,39 @@
     font-variant-numeric: tabular-nums; font-weight: 700;
     color: #38bdf8; min-width: 2.2rem;
   }
+  select {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #334155;
+    border-radius: 4px; padding: .3rem .5rem; font: inherit; font-size: .85rem;
+    max-width: 17rem;
+  }
+  .keybtn {
+    background: #1e293b; color: #cbd5e1; border: 1px solid #334155;
+    border-radius: 4px; padding: .3rem .6rem; font: inherit; font-size: .8rem;
+    cursor: pointer;
+  }
+  .keybtn:hover { border-color: #38bdf8; color: #e2e8f0; }
   .meta { color: #94a3b8; font-size: .82rem; }
   .meta.rel { margin-left: auto; font-family: ui-monospace, monospace; font-size: .74rem; color: #64748b; }
+  .keypanel {
+    position: absolute; top: .75rem; right: .75rem; z-index: 20;
+    background: #0f172a; border: 1px solid #334155; border-radius: 6px;
+    padding: .7rem .85rem; max-width: 22rem; max-height: 70%; overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,.55);
+  }
+  .keyhead { display: flex; align-items: center; gap: 1rem; margin-bottom: .5rem; }
+  .keyhead strong { font-size: .85rem; }
+  .keyhead button {
+    margin-left: auto; background: none; border: 0; color: #94a3b8;
+    font-size: 1.1rem; line-height: 1; cursor: pointer; padding: 0 .2rem;
+  }
+  .keypanel ul { list-style: none; margin: 0; padding: 0; display: flex;
+    flex-direction: column; gap: .35rem; }
+  .keypanel li { display: grid; grid-template-columns: .8rem 3.4rem 1fr;
+    gap: .5rem; align-items: baseline; font-size: .78rem; }
+  .keypanel .sw { width: .8rem; height: .8rem; border-radius: 2px;
+    display: inline-block; align-self: center; }
+  .keypanel b { font-family: ui-monospace, monospace; color: #e2e8f0; }
+  .keypanel .id { color: #94a3b8; }
   .stage { position: relative; background: #000; }
   .msg {
     position: absolute; inset: 0; display: flex; flex-direction: column;
