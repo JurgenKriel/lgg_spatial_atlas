@@ -78,6 +78,32 @@ deploy/sync_to_nectar.sh --host ubuntu@<vm> --src $WORK/release --version v1
 deploy/smoke_test.sh https://<domain>/ reviewer:<pass>
 ```
 
+## 4. Look at it before shipping it
+
+No VM needed — serve the release from the HPC and tunnel to it:
+
+```bash
+# on the HPC (use a compute node for a big release: srun --pty bash)
+deploy/preview_local.sh --release $WORK/release --port 8080
+
+# on your laptop, in another terminal — the script prints this line for you
+ssh -N -L 8080:localhost:8080 <you>@<node>
+# then open http://localhost:8080/
+```
+
+It serves the app and the release from one origin, with the Zarr content types
+the real host sets, so what you see is what a reviewer sees.
+
+**It binds loopback only.** This is unpublished patient-derived data; on
+`0.0.0.0` anyone able to reach that port on the node could read it with no
+credentials. The SSH tunnel is the access path.
+
+For a full dress rehearsal of the *production* config — basic auth, TLS, the
+immutable cache headers — run nginx from a container against the same tree
+instead; that path is what `deploy/smoke_test.sh` exercises. Note the preview
+deliberately does **not** set immutable caching (you want rebuilds to show up),
+so the smoke test's cache check is expected to fail against it and only that one.
+
 ---
 
 ## What the first release contains
