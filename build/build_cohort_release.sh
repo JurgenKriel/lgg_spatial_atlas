@@ -37,9 +37,9 @@ mkdir -p "$RELEASE" "$WORK/logs"
 SECTION="$(awk -F, -v n="${SLURM_ARRAY_TASK_ID:-1}" 'NR==n+1{print $1}' "$SECTIONS")"
 [ -n "$SECTION" ] || { echo "no section at row ${SLURM_ARRAY_TASK_ID:-1}"; exit 0; }
 
-H5AD="$WORK/h5ad/${SECTION}.h5ad"
-if [ ! -f "$H5AD" ]; then
-    echo "SKIP $SECTION — no h5ad (not present in the cohort object?)"
+EXPORT="$WORK/export"
+if [ ! -f "$EXPORT/${SECTION}.json" ]; then
+    echo "SKIP $SECTION — not exported (not present in the cohort object?)"
     exit 0
 fi
 
@@ -49,7 +49,7 @@ MS="$RELEASE/ms_${SECTION}-anndata.zarr"
 
 echo "=== $SECTION"
 "$PY" "$REPO/build/build_section_zarr.py" \
-    --section "$SECTION" --h5ad "$H5AD" --out "$CELLS" --palettes "$PALETTES"
+    --section "$SECTION" --indir "$EXPORT" --out "$CELLS" --palettes "$PALETTES"
 
 # MS is per-section and optional. Only ven2 currently has ST-frame-aligned
 # metabolite coordinates; ven1 and ven3-ven6 hold raw pre-alignment matrices, so

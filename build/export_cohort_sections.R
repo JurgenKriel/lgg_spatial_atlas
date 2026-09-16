@@ -1,9 +1,21 @@
 #!/usr/bin/env Rscript
-# Export one h5ad per cohort section from the cohort SingleCellExperiment.
+# Export one cohort section per file from the cohort SingleCellExperiment.
 #
-# Load the 7M-cell object ONCE and slice it, rather than 66 times. The object is
-# ~6.4 GB resident and takes ~40 s to read, so per-section loading would cost
-# hours of pure I/O.
+# Load the 7M-cell object ONCE and slice it; per-section loading would be hours
+# of pure I/O for no benefit.
+#
+# INTERCHANGE FORMAT — why not h5ad
+# The obvious choice, zellkonverter::writeH5AD, bridges to python via
+# basilisk/reticulate and starts installing a pyenv into $HOME. This project's
+# home directory is inode-constrained (it has broken package installs before),
+# and a python environment inside an R job is a dependency risk that buys
+# nothing here. So each section is written as three plain files instead:
+#
+#   <section>.X.f32     raw float32, column-major, genes x cells
+#   <section>.obs.tsv   one row per cell, the annotation columns
+#   <section>.json      shape, gene names, and the column order
+#
+# Base R only, no bridge, and numpy reads the matrix with a single fromfile.
 #
 # NAME MATCHING
 # Section ids disagree across sources in punctuation only:
@@ -11,17 +23,16 @@
 #     GL0043_1.1       GL0043_1_1
 #     LGG-A1           LGGA1
 #     ven5.2.1         ven_5_2_1
-# Stripping non-alphanumerics and lowercasing reconciles every one of them, so
-# match on that canonical key rather than maintaining a hand-written lookup that
-# will drift. Anything that still fails to match is reported, not silently
-# skipped — a section quietly missing from the atlas is worse than a loud error.
+# Stripping non-alphanumerics and lowercasing reconciles every one, so match on
+# that canonical key rather than a hand-written lookup that will drift. Anything
+# that still fails to match is reported, never silently skipped — a section
+# quietly missing from the atlas is worse than a loud error.
 #
 # Usage:
 #   export_cohort_sections.R <cohort.rds> <sections.csv> <outdir> [only_section ...]
 
 suppressPackageStartupMessages({
   library(SingleCellExperiment)
-  library(zellkonverter)
 })
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -46,13 +57,8 @@ stopifnot("sample" %in% colnames(cd))
 sce_samples <- as.character(cd$sample)
 key_to_sample <- tapply(sce_samples, canon(sce_samples), function(v) v[1])
 
-# Column names must be unique and stable — they are the join key downstream.
-cell_ids <- colnames(sce)
-if (is.null(cell_ids) || anyDuplicated(cell_ids)) {
-  cat("  ! colnames absent or not unique; synthesising <sample>:<index>\n")
-  cell_ids <- paste0(sce_samples, ":", seq_len(ncol(sce)))
-  colnames(sce) <- cell_ids
-}
+genes <- rownames(sce)
+cat("genes:", length(genes), "\n")
 
 keep_cols <- intersect(
   c("annotation", "annotation_intermediates", "niche", "x_coord", "y_coord",
@@ -60,44 +66,55 @@ keep_cols <- intersect(
   colnames(cd))
 cat("carrying colData:", paste(keep_cols, collapse = ", "), "\n\n")
 
+assay_name <- if ("X" %in% assayNames(sce)) "X" else assayNames(sce)[1]
+
 ok <- 0; failed <- character(0)
 for (i in seq_len(nrow(sections))) {
   section <- sections$section[i]
-  key <- canon(section)
-  sce_name <- key_to_sample[[key]]
+  sce_name <- key_to_sample[[canon(section)]]
 
   if (is.null(sce_name) || is.na(sce_name)) {
     cat(sprintf("[%2d/%d] %-16s NOT IN OBJECT — skipped\n", i, nrow(sections), section))
-    failed <- c(failed, section)
-    next
+    failed <- c(failed, section); next
   }
-
   idx <- which(sce_samples == sce_name)
   if (!length(idx)) { failed <- c(failed, section); next }
 
-  sub <- sce[, idx]
-  colData(sub) <- colData(sub)[, keep_cols, drop = FALSE]
-  # One assay, named X — anything else confuses the python side.
-  if (!"X" %in% assayNames(sub)) assayNames(sub)[1] <- "X"
-  for (a in setdiff(assayNames(sub), "X")) assay(sub, a) <- NULL
-  reducedDims(sub) <- list()
+  res <- tryCatch({
+    m <- assay(sce, assay_name)[, idx, drop = FALSE]
+    m <- as.matrix(m)                       # genes x cells, column-major
+    storage.mode(m) <- "double"
+    m[!is.finite(m)] <- 0
 
-  out <- file.path(outdir, paste0(section, ".h5ad"))
-  tryCatch({
-    writeH5AD(sub, out, X_name = "X", compression = "gzip", verbose = FALSE)
-    cat(sprintf("[%2d/%d] %-16s <- %-16s %8s cells  %6.0f MB\n",
+    con <- file(file.path(outdir, paste0(section, ".X.f32")), "wb")
+    writeBin(as.vector(m), con, size = 4)   # float32, column-major
+    close(con)
+
+    obs <- as.data.frame(cd[idx, keep_cols, drop = FALSE])
+    obs$cell_index <- idx
+    write.table(obs, file.path(outdir, paste0(section, ".obs.tsv")),
+                sep = "\t", quote = FALSE, row.names = FALSE, na = "")
+
+    meta <- list(section = section, sce_sample = sce_name,
+                 n_genes = nrow(m), n_cells = ncol(m),
+                 order = "F", dtype = "float32", genes = genes)
+    writeLines(jsonlite::toJSON(meta, auto_unbox = TRUE),
+               file.path(outdir, paste0(section, ".json")))
+
+    sz <- file.info(file.path(outdir, paste0(section, ".X.f32")))$size / 1e6
+    cat(sprintf("[%2d/%d] %-16s <- %-16s %9s cells  %6.0f MB\n",
                 i, nrow(sections), section, sce_name,
-                format(length(idx), big.mark = ","),
-                file.info(out)$size / 1e6))
-    ok <- ok + 1
+                format(ncol(m), big.mark = ","), sz))
+    rm(m); gc(verbose = FALSE)
+    TRUE
   }, error = function(e) {
-    cat(sprintf("[%2d/%d] %-16s FAILED: %s\n", i, nrow(sections), section, conditionMessage(e)))
-    failed <<- c(failed, section)
+    cat(sprintf("[%2d/%d] %-16s FAILED: %s\n", i, nrow(sections), section,
+                conditionMessage(e)))
+    FALSE
   })
-  rm(sub); gc(verbose = FALSE)
+  if (isTRUE(res)) ok <- ok + 1 else failed <- c(failed, section)
 }
 
 cat("\nexported", ok, "of", nrow(sections), "sections to", outdir, "\n")
-if (length(failed)) {
-  cat("NOT exported (", length(failed), "):", paste(failed, collapse = ", "), "\n")
-}
+if (length(failed)) cat("NOT exported (", length(failed), "):",
+                        paste(failed, collapse = ", "), "\n")

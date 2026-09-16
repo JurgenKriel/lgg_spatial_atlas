@@ -21,7 +21,7 @@ SECTIONS="${SECTIONS:-$WORK/sections.csv}"
 RDS="${RDS:-/stornext/Bioinf/data/lab_brain_cancer/projects/tme_spatial/transcriptomics/venture/ST/data/processed/full_ven_integrated_cleaned.rds}"
 ONLY="${ONLY:-}"
 
-mkdir -p "$WORK/logs" "$WORK/h5ad"
+mkdir -p "$WORK/logs" "$WORK/export"
 
 source /etc/profile.d/modules.sh
 module load R/4.5.3
@@ -31,4 +31,4 @@ export LD_LIBRARY_PATH="/vast/projects/BCRL_Multi_Omics/cellpose_env/lib:${LD_LI
 export R_LIBS="/vast/projects/BCRL_Multi_Omics/R_libraries:/vast/projects/BCRL_Multi_Omics/Venture_lib/lib/R/library"
 
 # shellcheck disable=SC2086
-Rscript "$REPO/build/export_cohort_sections.R" "$RDS" "$SECTIONS" "$WORK/h5ad" $ONLY
+Rscript "$REPO/build/export_cohort_sections.R" "$RDS" "$SECTIONS" "$WORK/export" $ONLY

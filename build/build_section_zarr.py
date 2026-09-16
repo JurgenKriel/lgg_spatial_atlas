@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Assemble one cohort section into a Vitessce-ready AnnData zarr.
 
-Input is the per-section h5ad exported from the cohort SingleCellExperiment,
-whose colData already carries cell type (`annotation`), `niche` and coordinates
-(`x_coord`, `y_coord`) — so no join against the centroids stores is needed. A
-centroids store can still be supplied to override or fill gaps.
+Input is the three-file per-section export from the cohort SingleCellExperiment
+(`<section>.X.f32`, `.obs.tsv`, `.json`), whose colData already carries cell type
+(`annotation`), `niche` and coordinates (`x_coord`, `y_coord`) — so no join
+against the centroids stores is needed, and the three-way join that the pilot
+had to validate does not arise on the cohort path at all.
 
 Decisions baked in here, each with a reason:
 
@@ -23,7 +24,7 @@ Decisions baked in here, each with a reason:
     colours in different patients.
 
 Usage:
-    build_section_zarr.py --section ven2_z1 --h5ad ven2_z1.h5ad \
+    build_section_zarr.py --section ven2_z1 --indir <export-dir> \
         --out venture_atlas-ven2_z1-anndata.zarr --palettes palettes.json
 """
 from __future__ import annotations
@@ -60,7 +61,8 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--section", required=True)
-    ap.add_argument("--h5ad", required=True)
+    ap.add_argument("--indir", required=True,
+                    help="directory holding <section>.X.f32/.obs.tsv/.json")
     ap.add_argument("--out", required=True)
     ap.add_argument("--palettes")
     ap.add_argument("--max-cells", type=int, default=0,
@@ -68,7 +70,25 @@ def main() -> None:
     args = ap.parse_args()
 
     print(f"== {args.section}")
-    adata = ad.read_h5ad(args.h5ad)
+    stem = os.path.join(args.indir, args.section)
+    with open(stem + ".json") as fh:
+        meta = json.load(fh)
+    n_genes, n_cells = int(meta["n_genes"]), int(meta["n_cells"])
+    genes = [str(g) for g in meta["genes"]]
+
+    # Written column-major as genes x cells, so read flat and transpose once.
+    flat = np.fromfile(stem + ".X.f32", dtype="<f4")
+    if flat.size != n_genes * n_cells:
+        raise SystemExit(f"{stem}.X.f32 has {flat.size} values, "
+                         f"expected {n_genes * n_cells}")
+    Xmat = flat.reshape((n_genes, n_cells), order="F").T   # -> cells x genes
+
+    obs_in = pd.read_csv(stem + ".obs.tsv", sep="\t", dtype=str, keep_default_na=False)
+    if len(obs_in) != n_cells:
+        raise SystemExit(f"obs has {len(obs_in)} rows, matrix has {n_cells} cells")
+
+    adata = ad.AnnData(X=Xmat, obs=obs_in.copy(), var=pd.DataFrame(index=pd.Index(genes)))
+    adata.obs_names = pd.Index([f"{args.section}:{i}" for i in range(n_cells)])
     print(f"   input      : {adata.n_obs:,} cells x {adata.n_vars} genes")
 
     ct_key = pick(adata.obs, CELL_TYPE_KEYS, "cell type")
