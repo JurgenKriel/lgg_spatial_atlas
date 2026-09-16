@@ -218,3 +218,56 @@ change with no code change — the manifest already carries per-section modality
 ---
 
 *Phase 6 — scope, 2026-09-16.*
+
+
+---
+
+## 7. First cohort release — BUILT 2026-09-16
+
+Built and validated end to end. Location:
+`/vast/scratch/users/kriel.j/atlas_cohort/release` — **on scratch**, so sync it
+to the Nectar VM before any purge window.
+
+| | |
+|---|---|
+| Patients | 15 |
+| Sections | **65** of 66 (`GL0184_prim_1` absent from the cohort object) |
+| Cells | **7,063,837** |
+| Sections with MS | 8 (ven2's full z-stack) |
+| Size | **2.1 GB**, 14,224 objects |
+| Legend | 27 cell types, 12 niches, all with biological identities |
+
+Axis handling came out right across the cohort: nine patients as clinical
+timepoint series, five as z-stacks, and **ven5 as `mixed`** — an 8-plane stack
+plus two later `recurrent_vora` sections, which is a real property of that
+patient rather than a defect.
+
+Validation: served through real nginx, **16/16 smoke checks pass**, including
+all 73 data URLs across all 65 configs resolving.
+
+Build timings, for planning re-runs: export 4m14s for 65 sections (8.8 GB of
+interchange files); build array ~15 min at 12-way concurrency; MS layers ~5 min.
+
+### An alignment observation worth passing to lu.t
+
+Every ven2 MS plane was validated against its own cells by median
+nearest-neighbour distance. Seven of the eight sit at **20.8-22.6 um**. **z1 is
+38.2 um** - nearly double.
+
+The obvious hypothesis is the documented z1/z2 label swap, so it was tested
+rather than assumed: pairing MS z1 against cells z2 gives **48.8 um**, which is
+*worse*, and MS z2 fits cells z1 and z2 about equally (20.4 vs 22.3 um). So the
+z1 outlier is **not** explained by the label inversion - it is an alignment
+quality issue specific to that plane. It passes the 100 um build threshold and
+ships, but it is the one plane in the release whose registration is measurably
+weaker than its neighbours.
+
+This does **not** resolve section 3.4; the z3-z8 pairing question stands.
+
+### Next
+
+1. Sync to Nectar once an instance exists:
+   `deploy/sync_to_nectar.sh --host ubuntu@<vm> --src <release> --version v1`
+2. Confirm Vitessce renders in a browser - the one thing never verified here.
+3. lu.t on the ven3-ven6 aligned files (section 3.1), after which those patients'
+   MS drops in as a data change with no code change.
