@@ -71,7 +71,19 @@ assay_name <- if ("X" %in% assayNames(sce)) "X" else assayNames(sce)[1]
 ok <- 0; failed <- character(0)
 for (i in seq_len(nrow(sections))) {
   section <- sections$section[i]
-  sce_name <- key_to_sample[[canon(section)]]
+
+  # Already exported? Skip, so a failed run resumes rather than redoing work.
+  if (file.exists(file.path(outdir, paste0(section, ".json")))) {
+    cat(sprintf("[%2d/%d] %-16s already exported — skipping\n", i, nrow(sections), section))
+    ok <- ok + 1
+    next
+  }
+
+  # `[[` on a missing name throws "subscript out of bounds" rather than
+  # returning NULL, which turned the intended skip-and-report into a hard
+  # failure on the first section absent from the object. Check membership.
+  key <- canon(section)
+  sce_name <- if (key %in% names(key_to_sample)) key_to_sample[[key]] else NA_character_
 
   if (is.null(sce_name) || is.na(sce_name)) {
     cat(sprintf("[%2d/%d] %-16s NOT IN OBJECT — skipped\n", i, nrow(sections), section))
