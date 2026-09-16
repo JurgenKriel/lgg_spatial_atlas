@@ -57,7 +57,7 @@ The roadmap says all six ven samples have matched MS. Actually:
 
 | Patient | MS planes | Format | State |
 |---|---|---|---|
-| ven1 | **2 only** | `metabolomics_edge_removed` | hard data limit, not a path problem |
+| ven1 | **2 only** | `metabolomics_edge_removed` | hard data limit, AND raw/unaligned — unusable as-is |
 | ven2 | 8 | `aligned_metabolites/layer_{1..8}/` | **aligned**, `x_transformed`/`y_transformed` present |
 | ven3–ven6 | 8 each | `metabolomics_edge_removed` | **raw, pre-alignment** — only `x`,`y` |
 
@@ -106,20 +106,33 @@ every data URL across all four configs resolving.
 
 ### 3.1 Which MS file is canonical for ven3–ven6? *(blocks the MS layer for 4 patients)*
 
-Someone who knows the alignment work — moffet.j or lu.t — must name, per patient
-per plane, the one ST-frame-aligned coordinate file. Until then the cohort atlas
+**Owner: lu.t** (confirmed 2026-09-16). lu.t must name, per patient per plane,
+the one ST-frame-aligned coordinate file among the versioned attempts. Until then the cohort atlas
 can ship **ven2's 8 MS planes and ven1's 2**, and the other four ven patients are
 ST-only in the viewer. That is a perfectly shippable first cohort release, and it
 is the recommended path rather than blocking everything on an alignment cleanup.
 
-### 3.2 Which cohort gene-expression object is canonical?
+### 3.2 Which cohort gene-expression object is canonical? — **RESOLVED 2026-09-16**
 
-Two candidates sit side by side on stornext: `ven_all_250217.rds` (1.17 GB,
-2025-03) and `full_ven_integrated_cleaned.rds` (a SingleCellExperiment,
-307 genes × 7.06M cells, 2026-05 — newer). Their per-sample coverage is
-unverified. Needs moffet.j to confirm, plus a header-only probe job rather than
-loading either blind. Note stornext is read-only on login nodes: any copy runs on
-the `datamover` partition.
+Answered empirically rather than by waiting (`build/probe_cohort_object.R`).
+**`full_ven_integrated_cleaned.rds` is usable as the cohort gene source**: a
+SingleCellExperiment, one assay `X`, 307 genes × 7,063,837 cells, colData
+carrying `annotation`, `niche`, `x_coord`, `y_coord`, `sample`.
+
+It covers **65 of the 66 sections**. The probe initially reported 12 missing,
+but 11 of those were the same sections under different punctuation —
+`GL0043_1.1` vs `GL0043_1_1`, `LGG-A1` vs `LGGA1`, `ven5.2.1` vs `ven_5_2_1`.
+Stripping non-alphanumerics and lowercasing reconciles every one, so the
+exporter matches on that canonical key rather than a hand-written lookup.
+
+**Genuinely absent: `GL0184_prim_1`** — the smallest section in the cohort at
+2,900 cells. The first release therefore carries 65 sections, and that one
+needs moffet.j only if it is wanted.
+
+A useful consequence: because the colData already carries cell type, niche and
+coordinates, **the build does not need the centroids stores at all**. That
+removes the three-way join — and its matched-fraction risk — from the cohort
+path entirely.
 
 ### 3.3 pt6 z4 has two unreconciled files
 
@@ -184,13 +197,16 @@ comfortable headroom — which Phase 8's tissue rasters will consume, not this.
 
 ---
 
-## 6. Recommended first cohort release
+## 6. First cohort release — AGREED 2026-09-16
 
-Do not wait for §3.1. Ship:
+Proceeding without waiting on §3.1 (lu.t). Shipping:
 
-- all 66 sections with cells, cell type, niche and gene expression;
-- the MS layer for **ven2 (8 planes) and ven1 (2)** only;
-- ven3–ven6 as ST-only until their canonical aligned file is named;
+- **65 sections** with cells, cell type, niche and gene expression
+  (all but `GL0184_prim_1`, which is not in the cohort object);
+- the MS layer for **ven2 only (8 planes)**. Correcting an earlier note: ven1's
+  metabolomics is also raw pre-alignment, so it is in the same position as
+  ven3–ven6. ven2 is the only patient with ST-frame-aligned coordinates today;
+- ven1 and ven3–ven6 as ST-only until lu.t names the canonical aligned file;
 - z3–z8 pairings applied only after §3.4 is confirmed.
 
 That is a complete, honest cohort atlas that no longer depends on anyone else's
