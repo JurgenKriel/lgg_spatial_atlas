@@ -173,6 +173,13 @@ def main(argv):
     )
     vc.link_views([sp_cells, osets], [ct.OBS_SET_COLOR], [color_val])
 
+    # The cells panel needs its OWN colormap scope. Without one it falls back to
+    # a default when the feature list flips obsColorEncoding to "geneSelection",
+    # and — more importantly — sharing the MS panel's scope would make changing
+    # one panel's colormap silently change the other, defeating the independent
+    # selection this config exists to provide.
+    vc.link_views([sp_cells, fl_gene], [ct.FEATURE_VALUE_COLORMAP], ["plasma"])
+
     if has_ms:
         # --- dataset B: MS spots, featureType 'metabolite' -------------------
         # A distinct obsType is what stops selecting a metabolite from also

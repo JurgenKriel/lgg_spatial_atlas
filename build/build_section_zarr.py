@@ -67,6 +67,8 @@ def main() -> None:
     ap.add_argument("--palettes")
     ap.add_argument("--max-cells", type=int, default=0,
                     help="subsample above this many cells (0 = keep all)")
+    ap.add_argument("--transform", choices=("log1p", "none"), default="log1p",
+                    help="value transform applied to X for display (default log1p)")
     args = ap.parse_args()
 
     print(f"== {args.section}")
@@ -116,6 +118,19 @@ def main() -> None:
     X = np.asarray(X.todense()) if hasattr(X, "todense") else np.asarray(X)
     X = np.ascontiguousarray(np.nan_to_num(X, nan=0.0), dtype=np.float32)
 
+    # The cohort object holds RAW COUNTS, and raw counts colour badly: this
+    # panel's p99 is ~6 while its max is 75, so a handful of extreme cells
+    # compress the whole scale and every gene renders as near-uniform dark with
+    # a few bright dots — indistinguishable between genes. log1p restores the
+    # dynamic range, and matches the pilot, which drew on Seurat's
+    # log-normalised "data" layer (max ~7.4) rather than counts.
+    if args.transform == "log1p":
+        before = float(X.max())
+        X = np.log1p(X, dtype=np.float32)
+        print(f"   transform  : log1p (max {before:.1f} -> {float(X.max()):.2f})")
+    else:
+        print("   transform  : none (raw values)")
+
     # --- obs the viewer actually uses ----------------------------------------
     ct = adata.obs[ct_key].astype(str).to_numpy()
     ni = adata.obs[ni_key].astype(str).to_numpy()
@@ -132,6 +147,8 @@ def main() -> None:
 
     out = ad.AnnData(X=X, obs=obs, var=var)
     out.obsm["spatial"] = np.column_stack([xs, ys]).astype(np.float32)
+    # Record it, so nobody later mistakes these for counts.
+    out.uns["X_transform"] = args.transform
 
     # --- uns: cohort palette, aligned to this section's categories -----------
     if args.palettes:
