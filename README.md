@@ -18,7 +18,12 @@ Planning + Phase 1 (pipeline bootstrap) in progress. See `.planning/ROADMAP.md`.
 ## Data sources (on WEHI HPC, not in this repo)
 - Genes: `ST/.../ven_all_250217.rds` (Seurat cohort)
 - Cell type / niche / centroids: `venture_ST/centroids/*_centroids.zarr` (SpatialData)
-- Metabolomics (pt2, pt5 only): `venture_pt{2,5}/integrated/integrated_data_*.rds`
+- Metabolomics (ven1–ven6): `venture_pt{N}/metabolomics_edge_removed/*_with_xy.csv`
+  (pt2 also `aligned_metabolites/`)
+- Metabolite annotations (ven2–ven6, per plane):
+  `build/metabolite_annotations_ven2-6.tsv`, built by `build/metabolite_annotations.py` from
+  `/stornext/Home/data/data/allstaff/k/kriel.j/Ven2_Ven3_Ven4_Ven5_Ven6_selected_peak_annotation.csv`;
+  applied to MS zarrs by `build/annotate_ms_layers.py` (or at build time in `build_ms_layers.py`)
 
 ## Environment (WEHI HPC)
 Nextflow + `apptainer/1.4.1`; see `webatlas/versions.env`. Container cache in

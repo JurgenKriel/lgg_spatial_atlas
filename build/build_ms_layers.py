@@ -3,6 +3,7 @@ transformed_x/y really is the aligned frame against that plane's cell centroids.
 import sys, os, shutil, json
 import numpy as np, pandas as pd, anndata as ad, zarr
 from scipy.spatial import cKDTree
+from metabolite_annotations import annotate_var
 
 PLANES = {
  "z2": "/vast/projects/BCRL_Multi_Omics/venture_pt2/aligned_metabolites/Ven2B_z2_transformed_metabolite_matrix_final.txt",
@@ -27,6 +28,7 @@ for z, src in PLANES.items():
     raw=np.array([float(c[1:]) for c in mz_cols])
     var=pd.DataFrame({"raw_mz":raw}, index=[f"mz-{v:.4f}" for v in raw])
     var["feature_type"]="metabolite"; var["is_metabolite"]=True
+    var=annotate_var(var, "ven2", z)   # readable metabolite names (metabolite_annotations_ven2-6.tsv)
     a=ad.AnnData(X=X, obs=pd.DataFrame(index=[str(i) for i in range(len(df))]), var=var)
     a.obsm["spatial"]=df[[xc,yc]].to_numpy(dtype="float32")
     out=f"{OUTDIR}/ms_ven2_{z}-anndata.zarr"

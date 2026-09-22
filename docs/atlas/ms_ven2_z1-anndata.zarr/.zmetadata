@@ -191,7 +191,18 @@
             "column-order": [
                 "raw_mz",
                 "feature_type",
-                "is_metabolite"
+                "is_metabolite",
+                "mz_id",
+                "metabolite_name",
+                "adduct",
+                "ppm_error",
+                "annotation_source",
+                "targeted_names",
+                "targeted_hmdb_ids",
+                "hmdb_candidates",
+                "hmdb_ids",
+                "n_hmdb_candidates",
+                "is_annotated"
             ],
             "encoding-type": "dataframe",
             "encoding-version": "0.2.0"
@@ -224,6 +235,62 @@
             "zarr_format": 2
         },
         "var/_index/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/adduct/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/adduct/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/annotation_source/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/annotation_source/.zattrs": {
             "encoding-type": "string-array",
             "encoding-version": "0.2.0"
         },
@@ -287,6 +354,86 @@
             "encoding-type": "array",
             "encoding-version": "0.2.0"
         },
+        "var/hmdb_candidates/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/hmdb_candidates/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/hmdb_ids/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/hmdb_ids/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/is_annotated/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|b1",
+            "fill_value": false,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/is_annotated/.zattrs": {
+            "encoding-type": "array",
+            "encoding-version": "0.2.0"
+        },
         "var/is_metabolite/.zarray": {
             "chunks": [
                 267
@@ -308,6 +455,110 @@
             "zarr_format": 2
         },
         "var/is_metabolite/.zattrs": {
+            "encoding-type": "array",
+            "encoding-version": "0.2.0"
+        },
+        "var/metabolite_name/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/metabolite_name/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/mz_id/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/mz_id/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/n_hmdb_candidates/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": 0.0,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/n_hmdb_candidates/.zattrs": {
+            "encoding-type": "array",
+            "encoding-version": "0.2.0"
+        },
+        "var/ppm_error/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": 0.0,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/ppm_error/.zattrs": {
             "encoding-type": "array",
             "encoding-version": "0.2.0"
         },
@@ -333,6 +584,62 @@
         },
         "var/raw_mz/.zattrs": {
             "encoding-type": "array",
+            "encoding-version": "0.2.0"
+        },
+        "var/targeted_hmdb_ids/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/targeted_hmdb_ids/.zattrs": {
+            "encoding-type": "string-array",
+            "encoding-version": "0.2.0"
+        },
+        "var/targeted_names/.zarray": {
+            "chunks": [
+                267
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|O",
+            "fill_value": 0,
+            "filters": [
+                {
+                    "id": "vlen-utf8"
+                }
+            ],
+            "order": "C",
+            "shape": [
+                267
+            ],
+            "zarr_format": 2
+        },
+        "var/targeted_names/.zattrs": {
+            "encoding-type": "string-array",
             "encoding-version": "0.2.0"
         },
         "varm/.zattrs": {
