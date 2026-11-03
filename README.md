@@ -36,10 +36,10 @@ which tissue niche those cells belong to.
 
 | Layer | What you see | Source |
 |---|---|---|
-| 🧬 **Gene** | Per-cell expression of any panel gene | Xenium spatial transcriptomics |
-| ⚗️ **Metabolite** | Ion intensity per *m/z*, with putative annotations | MS imaging, aligned to the ST section |
-| 🔬 **Cell type** | Annotated cell identity for every cell | Clustering + marker-based annotation |
-| 🗺️ **Niche** | Recurring multicellular neighbourhoods | Spatial niche analysis |
+| 🧬 **Transcriptomics** | Per-cell expression of any panel gene | Xenium spatial transcriptomics |
+| ⚗️ **Metabolomics** | Ion intensity per *m/z*, with putative annotations | MS imaging, aligned to the ST section |
+| 🔬 **Cell types** | Annotated cell identity for every cell | Clustering + marker-based annotation |
+| 🗺️ **Niche analysis** | Recurring multicellular neighbourhoods | Spatial niche analysis |
 
 **Two ways through the cohort:**
 
