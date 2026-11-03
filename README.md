@@ -1,4 +1,4 @@
-# Venture Multi-Omic Web Atlas
+# LGG Multi-Omic Web Atlas
 
 Interactive web atlas of the Venture brain-cancer cohort built with the
 [haniffalab **webatlas-pipeline**](https://github.com/haniffalab/webatlas-pipeline)
