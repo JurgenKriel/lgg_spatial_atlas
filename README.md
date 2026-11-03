@@ -1,7 +1,7 @@
 # LGG Spatial Atlas
 
 **Explore low-grade glioma in space: genes, metabolites, cell types and tissue
-niches, measured on the same tissue and browsable in your web browser.**
+niches, measured on sequential tissue sections and browsable in your web browser.**
 
 <p>
   <a href="https://jurgenkriel.github.io/lgg_spatial_atlas/"><b>▶ Open the atlas</b></a>
