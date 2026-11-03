@@ -17,7 +17,7 @@ the full cohort.
 - [x] **Phase 2: pt2 AnnData assembly (the fusion core)** — Extract + join genes, metabolites, cell type, niche, centroids into per-sample `h5ad`; validate the three-way cell join. [REQ-02, REQ-03]
 - [x] **Phase 3: webatlas config + Vitessce build (pt2)** — Author params YAML, run pipeline, produce a Vitessce config exposing Gene/Metabolite/Cell type/Niche selectors. [REQ-04, REQ-05]
 - [ ] **Phase 4: Viewer UX — samples, z-planes, feature-type grouping** *(in progress: z-slider done for z1–z3; sample selector pending)* — Sample switcher, per-z-plane view, palette wiring, distinct Gene vs Metabolite dropdowns. [REQ-06]
-- [ ] **Phase 5: Deployment & sharing** — Serve or statically export the pt2 atlas with documented collaborator access. [REQ-07]
+- [ ] **Phase 5: Deployment & sharing** — Serve the pt2 atlas from an **ARDC Nectar Research Cloud VM** (nginx: static Vitessce + Zarr, same-origin), gated by nginx basic-auth during review, opened + DOI at publication. WEHI Shiny ruled out; Cloudflare R2 retained as the post-publication mirror. Documented collaborator access. [REQ-07]
 - [ ] **Phase 6: Generalize to full cohort (15 ST samples; 6 with matched SM)** — Sample selector over all 15 ST samples; MS layer for the 6 matched (ven1–ven6), cleanly absent for the 9 ST-only. [REQ-08, REQ-09, REQ-10, REQ-11]
 
 ## Phase Details
@@ -68,13 +68,34 @@ the full cohort.
 **Plans**: TBD at plan-time (est. 1–2)
 
 ### Phase 5: Deployment & sharing
-**Goal**: Collaborators can open the pt2 atlas with documented steps.
+**Goal**: Collaborators can open the pt2 atlas with documented steps, on a hosting
+substrate that carries the unpublished→published lifecycle.
 **Depends on**: Phase 4
 **Requirements**: REQ-07
+**Decision (2026-09-14, supersedes 2026-07-21 R2 choice):** Host on the **ARDC Nectar
+Research Cloud** — a self-managed VM running **nginx**, serving the static Vitessce app
+**and** the chunked Zarr from **one origin** (which removes CORS entirely). Chosen for
+data sovereignty and governance: Nectar is Australian, research-sector and
+non-commercial, so the offshore-commercial-cloud objection that gated the R2 plan does
+not arise. **WEHI Shiny remains rejected** (Shiny-only, no Milton access, 1 GB/5 GB
+quota, no auth). Two-stage access: **nginx basic-auth during review → open + Zenodo DOI
+at publication** (app/data don't move, only the auth block changes). **R2 survives only
+as an optional post-publication mirror**, where its zero egress answers Nectar's off-net
+quota. Three consequences: we now own an OS (provisioning/TLS/patching/DR become
+deliverables); **self-hosting the Vitessce bundle moves from Milestone-2 Phase 7 into
+this phase**, because basic auth breaks the third-party `vitessce.io?url=` iframe; and
+**off-net egress is metered at 1 GB/core/month** (on-net/AARNet unlimited) — the sharpest
+new risk. Full component inventory, build order, sizing and risks in
+`.planning/phases/05-deployment/05-COMPONENTS.md`; superseded R2 decisions retained in
+`05-CONTEXT.md`; VM architecture detail in `.planning/NECTAR_HOSTING_BRIEF.md`.
 **Success Criteria** (what must be TRUE):
-  1. The atlas is served (or statically exported) and reachable by a second user following written instructions.
-  2. Data-serving approach (static files vs http server, HPC port-forward vs export) is decided and documented.
-**Plans**: TBD at plan-time (est. 1)
+  1. The atlas is served from a Nectar VM over HTTPS and reachable by a second user following written instructions.
+  2. Serving is configured: nginx serves Zarr **dotfiles** (`.zgroup`/`.zarray`/`.zmetadata`), immutable cache headers on chunks, no gzip on chunk binaries; HPC→VM `rsync` refresh path documented with an atomic versioned release swap.
+  3. The viewer has **no vitessce.io dependency** — the bundle is self-hosted same-origin, so basic auth covers app and data alike.
+  4. Access is gated (nginx basic-auth) during review and can be opened without moving app/data.
+  5. Research Governance sign-off (or its status) for hosting the unpublished data on Nectar is recorded.
+  6. The VM is rebuildable from committed provisioning config, and the off-net egress quota question has an answer from Nectar support.
+**Plans**: TBD at plan-time (est. 1–2)
 
 ### Phase 6: Generalize to full cohort (15 ST samples; 6 with matched SM)
 **Goal**: Every cohort sample browsable in one viewer, with the metabolite layer
@@ -110,7 +131,7 @@ for **all six ven samples**:
 | 2. pt2 AnnData assembly | 2/2 | **Complete** (2026-07-20) — 8 z-plane h5ad, genes+metab+celltype+niche |
 | 3. webatlas config + build | done | **Complete** (2026-07-20) — 8-z spatial atlas; multimodal split proven |
 | 4. Viewer UX | 0/? | Roadmapped |
-| 5. Deployment | 0/? | Roadmapped |
+| 5. Deployment | 0/? | **Substrate re-decided to Nectar (2026-09-14)**; components planned in 05-COMPONENTS.md — 5a test site is unblocked now |
 | 6. Cohort generalization | 0/? | Roadmapped |
 
 ## Key Risks & Open Questions (resolve during phase execution)
@@ -153,10 +174,21 @@ vitessce.io iframe):**
 | Side-by-side comparison | yes | none | 9 |
 | Hosting at cohort scale | CDN/object store | GitHub Pages (708MB for 3 planes) | 10 |
 
-- [ ] **Phase 7: Self-hosted webatlas-app frontend** — deploy webatlas-app; study/dataset browser; replaces the iframe. [REQ-12, REQ-18]
+- [ ] **Phase 7: Self-hosted webatlas-app frontend** — deploy webatlas-app; study/dataset browser; replaces the iframe. **A minimal same-origin self-hosted bundle is pulled forward into Phase 5 (component E-1) because basic auth breaks the vitessce.io iframe**; Phase 7 is then the full study/dataset browser on top. Hosted on the Phase 5 Nectar VM — no separate host to provision. [REQ-12, REQ-18]
 - [ ] **Phase 8: Image + segmentation layers** — H&E/IF as OME-Zarr raster; cell polygons as label images (also unlocks webatlas's native spatial view). [REQ-13, REQ-14]
 - [ ] **Phase 9: Annotations, curated views, comparison mode** — histopath/region layer; named figure presets; linked side-by-side. [REQ-15, REQ-16, REQ-17]
-- [ ] **Phase 10: Object-storage hosting** — R2/S3 + CORS; retire the Pages size ceiling. [REQ-19]
+- [ ] **Phase 10: Cohort-scale storage** — *Reconciled with Phase 5 (updated 2026-09-14):
+  the **Nectar volume** (and Swift object storage, if the allocation grants quota) IS the
+  cohort-scale store, replacing the standalone GitHub-Pages plan.* Remaining Phase-10
+  scope: final cohort sizing, and the publication-stage open-up (remove nginx auth) +
+  Zenodo DOI per Phase 5 D-06, optionally mirroring to R2 for zero-egress public serving.
+  [REQ-19]
 
-**Sequencing note:** Phase 10 (hosting) gates 6-9 in practice — the cohort will not
-fit on Pages. Phase 8 is the biggest visual win (tissue context + real cell shapes).
+**Sequencing note:** The hosting substrate is settled in **Phase 5 (Nectar VM)**, so it no
+longer gates 6–9 — the cohort will not fit on Pages, but a 100 GB Nectar volume clears
+that ceiling (cohort sized at ~22 GB / ~45k objects; see 05-COMPONENTS.md §5). Two
+sequencing changes from the Nectar decision: **Phase 7's self-hosted frontend is partly
+pulled into Phase 5** (auth requires same-origin), and **Phase 8's OME-Zarr rasters are
+what will actually consume the volume** — re-size storage before Phase 8 rather than
+assuming the cohort figure covers it. Phase 8 remains the biggest visual win (tissue
+context + real cell shapes).
