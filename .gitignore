@@ -9,3 +9,8 @@ work/
 *.h5ad
 *.zarr/
 build/scratch/
+# Analysis outputs: regenerate from the scripts in analysis/
+analysis/**/outputs/
+# Internal planning docs and agent workspaces: kept on disk, never published
+.planning/
+.claude/
