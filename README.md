@@ -4,7 +4,7 @@
 niches, measured on sequential tissue sections and browsable in your web browser.**
 
 <p>
-  <a href="https://jurgenkriel.github.io/lgg_spatial_atlas/"><b>▶ Open the atlas</b></a>
+  <a href="https://lgg-atlas.cloud.edu.au/"><b>▶ Open the atlas</b></a>
   &nbsp;·&nbsp; <a href="#whats-inside">What's inside</a>
   &nbsp;·&nbsp; <a href="#repository-map">Repository map</a>
   &nbsp;·&nbsp; <a href="#paper-analysis">Paper analysis</a>
